@@ -20,10 +20,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float dashingPower = 24f;
     float dashingTime = 0.2f;
     float dashingCooldown = 1f;
-    [SerializeField] float atksize = 0.5f;
+    [SerializeField] float atkdmg = 50f;
 
     [SerializeField] Vector2 groundchecksize;
     [SerializeField] Vector2 wallchecksize;
+    [SerializeField] Vector2 atksize;
 
     Rigidbody2D rb;
     Animator animator;
@@ -76,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
-            animator.SetTrigger("Dash");
+            //animator.SetBool("Dashing", isDashing);
             StartCoroutine(Dash());
         }
 
@@ -168,10 +169,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        //if (col.tag == "Enemy")
-        //{
-        //    liveScript.reduceLives();
-        //}
+        if (col.tag == "Enemy")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
 
         //if (col.tag == "Collectible")
         //{
@@ -205,7 +206,7 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(groundCheck.position, groundchecksize);
         Gizmos.DrawWireCube(wallCheck.position, wallchecksize);
-        Gizmos.DrawWireSphere(atkHitbox.position, atksize);
+        Gizmos.DrawWireCube(atkHitbox.position, atksize);
     }
 
     private void wallSlide()
@@ -265,6 +266,7 @@ public class PlayerController : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
+        animator.SetBool("Dashing", isDashing);
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
@@ -273,6 +275,7 @@ public class PlayerController : MonoBehaviour
         tr.emitting = false;
         rb.gravityScale = originalGravity;
         isDashing = false;
+        animator.SetBool("Dashing", isDashing);
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
     }
@@ -282,11 +285,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J))
         {
             animator.SetTrigger("Attack");
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(atkHitbox.position, atksize, enemyLayer);
+            Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(atkHitbox.position, atksize, 0f, enemyLayer);
 
             foreach(Collider2D enemy in hitEnemies)
             {
-                Debug.Log("We hit" + enemy.name);
+                enemy.GetComponent<Enemy>().takedamage(atkdmg);
             }
         }
     }
