@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour
+public class Player : MonoBehaviour
 {
     float hAxis;
     [SerializeField] Vector2 wallJumpingPower = new Vector2(8f, 16f);
@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform groundCheck;
     [SerializeField] Transform wallCheck;
     [SerializeField] Transform atkHitbox;
+    [SerializeField] Transform firePoint;
+
+    [SerializeField] GameObject[] fireballs;
 
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask wallLayer;
@@ -291,6 +294,9 @@ public class PlayerController : MonoBehaviour
             {
                 enemy.GetComponent<Enemy>().takedamage(atkdmg);
             }
+
+            fireballs[0].transform.position = firePoint.position;
+            fireballs[0].GetComponent<Aria_shot>().setDirection(Mathf.Sign(transform.localScale.x));
         }
     }
 }

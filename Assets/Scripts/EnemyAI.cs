@@ -26,7 +26,6 @@ public class EnemyAI : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         InvokeRepeating("UpdatePath", 0f, .5f);
-        seeker.StartPath(rb.position, target.position, OnPathComplete);
     }
 
     void UpdatePath()
@@ -57,16 +56,15 @@ public class EnemyAI : MonoBehaviour
         {
             reachedEndOfPath = true;
             return;
-        } else
+        }
+        else
         {
             reachedEndOfPath = false;
         }
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
-
         rb.AddForce(force);
-
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
 
         if (distance < nextWaypointDistance)
@@ -75,6 +73,7 @@ public class EnemyAI : MonoBehaviour
         }
         facing();
     }
+
     void facing()
     {
         if (rb.velocity.x >= 0.01f && isRight == false)

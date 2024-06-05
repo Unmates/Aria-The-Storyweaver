@@ -102,7 +102,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 161
+        width: 152
         height: 141
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -121,10 +121,10 @@ TextureImporter:
       name: Character_Aria_Sprite_Attack_1
       rect:
         serializedVersion: 2
-        x: 172
+        x: 186
         y: 0
-        width: 195
-        height: 141
+        width: 173
+        height: 138
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,10 +142,10 @@ TextureImporter:
       name: Character_Aria_Sprite_Attack_2
       rect:
         serializedVersion: 2
-        x: 382
+        x: 390
         y: 0
-        width: 185
-        height: 141
+        width: 174
+        height: 138
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,10 +163,10 @@ TextureImporter:
       name: Character_Aria_Sprite_Attack_3
       rect:
         serializedVersion: 2
-        x: 571
+        x: 579
         y: 0
-        width: 185
-        height: 141
+        width: 176
+        height: 138
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,22 +181,43 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_Aria_Sprite_Attack_4
+      name: Character_Aria_Sprite_Attack_5
       rect:
         serializedVersion: 2
-        x: 757
+        x: 756
         y: 0
-        width: 132
+        width: 129
         height: 141
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fab46d1a0562db646b9064423159bc0e
-      internalID: -1987962178
+      spriteID: e0100d8a81d41ef47a73c21d46d11008
+      internalID: -988539047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Aria_Sprite_Attack_6
+      rect:
+        serializedVersion: 2
+        x: 924
+        y: 0
+        width: 120
+        height: 141
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f57eeb3c660a6d41895a6cfdec61c9b
+      internalID: -577406206
       vertices: []
       indices: 
       edges: []
@@ -214,9 +235,16 @@ TextureImporter:
     nameFileIdTable:
       Character_Aria_Sprite_Attack_0: 2109814531
       Character_Aria_Sprite_Attack_1: -1894928023
+      Character_Aria_Sprite_Attack_10: -1391072115
+      Character_Aria_Sprite_Attack_11: -1591410510
       Character_Aria_Sprite_Attack_2: 428513070
       Character_Aria_Sprite_Attack_3: -562226241
       Character_Aria_Sprite_Attack_4: -1987962178
+      Character_Aria_Sprite_Attack_5: -988539047
+      Character_Aria_Sprite_Attack_6: -577406206
+      Character_Aria_Sprite_Attack_7: 306677555
+      Character_Aria_Sprite_Attack_8: -2035009403
+      Character_Aria_Sprite_Attack_9: -840239855
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
