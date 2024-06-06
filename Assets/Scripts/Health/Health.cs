@@ -6,11 +6,13 @@ public class Health : MonoBehaviour
 {
     [SerializeField] float maxHealth;
     [SerializeField] public float currentPlayerHp;
+    Animator animator;
 
     // Start is called before the first frame update
     void Awake()
     {
         currentPlayerHp = maxHealth;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
