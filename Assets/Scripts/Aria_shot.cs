@@ -52,7 +52,7 @@ public class Aria_shot : MonoBehaviour
                 Debug.LogWarning("No Enemy component found on the collided object with tag 'Enemy'.");
             }
         }
-        else if (col.tag == "Player")
+        else if (col.tag == "Player" || col.tag == "Background")
         {
             return;
         }

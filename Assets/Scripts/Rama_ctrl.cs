@@ -41,9 +41,6 @@ public class Rama_ctrl : MonoBehaviour
     [SerializeField] Transform groundCheck;
     [SerializeField] Transform wallCheck;
     [SerializeField] Transform atkHitbox;
-    [SerializeField] Transform firePoint;
-
-    [SerializeField] GameObject[] fireballs;
 
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask wallLayer;
