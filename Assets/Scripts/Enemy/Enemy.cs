@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -16,10 +17,14 @@ public class Enemy : MonoBehaviour
     public Animator animator;
     public Transform attackPoint; // Optional: Reference to the enemy's attack point
 
+    [SerializeField] GameObject playerhp;
+    Health health;
+
     private void Start()
     {
         currenthp = maxhp;
         animator = GetComponent<Animator>();
+        health = playerhp.GetComponent<Health>();
     }
 
     void Update()
@@ -46,7 +51,7 @@ public class Enemy : MonoBehaviour
     {
         if (col.tag == "Player")
         {
-            col.GetComponent<Health>().playerTakeDamage(damage);
+            health.playerTakeDamage(damage);
         }
     }
 

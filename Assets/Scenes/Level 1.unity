@@ -4331,7 +4331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &938898748
 Transform:
   m_ObjectHideFlags: 0
@@ -4543,7 +4543,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 938898747}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -4594,6 +4594,15 @@ TrailRenderer:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -7520,6 +7529,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentPlayerHp: 0
+  aria_obj: {fileID: 0}
+  rama_obj: {fileID: 0}
 --- !u!114 &1345326293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10241,6 +10252,7 @@ MonoBehaviour:
   groundCheck: {fileID: 1925231330}
   atkHitbox: {fileID: 269400026}
   firePoint: {fileID: 1215761275}
+  healthobj: {fileID: 0}
   fireballs:
   - {fileID: 481990768}
   - {fileID: 1027488922}

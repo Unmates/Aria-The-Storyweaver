@@ -3,52 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Rama_ctrl : MonoBehaviour
+public class Aria_ctrl : MonoBehaviour
 {
     float hAxis;
-    [SerializeField] Vector2 wallJumpingPower = new Vector2(8f, 16f);
 
     [SerializeField] float maxHP = 200f;
     float HP;
     [SerializeField] float speed = 3f;
     [SerializeField] float jumpPower = 3f;
-    [SerializeField] float wallslidespeed = 2f;
-    float wallJumpingDirection;
-    float wallJumpingTime = 0.2f;
-    float wallJumpingCounter;
-    [SerializeField] float wallJumpingDuration = 0.4f;
-    [SerializeField] float dashingPower = 24f;
-    float dashingTime = 0.2f;
-    float dashingCooldown = 1f;
+    [SerializeField] float airjumpCount = 1f;
+    [SerializeField] float maxairjump = 1f;
     [SerializeField] float atkdmg = 50f;
 
     [SerializeField] Vector2 groundchecksize;
-    [SerializeField] Vector2 wallchecksize;
     [SerializeField] Vector2 atksize;
 
     Rigidbody2D rb;
     Animator animator;
+    Health health;
 
     [SerializeField] bool onGround = false;
-    [SerializeField] bool onWall = false;
     [SerializeField] bool falling;
     bool isFacingRight = true;
-    bool isWallJumping;
-    bool canDash = true;
-    bool isDashing; 
 
     //[SerializeField] Transform BG;
     [SerializeField] Transform groundCheck;
-    [SerializeField] Transform wallCheck;
     [SerializeField] Transform atkHitbox;
+    [SerializeField] Transform firePoint;
+
+    [SerializeField] GameObject healthobj;
+    [SerializeField] GameObject[] fireballs;
 
     [SerializeField] LayerMask groundLayer;
-    [SerializeField] LayerMask wallLayer;
     [SerializeField] LayerMask enemyLayer;
 
     //[SerializeField] Lives liveScript;
-
-    [SerializeField] TrailRenderer tr;
 
     [SerializeField] AudioClip[] audioClips;
     AudioSource audioSource;
@@ -58,47 +47,23 @@ public class Rama_ctrl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        health = healthobj.GetComponent<Health>();
         HP = maxHP;
     }
 
     void Update()
     {
-        if (isDashing)
-        {
-            return;
-        }
-
         hAxis = Input.GetAxisRaw("Horizontal");
         jump();
         fallCheck();
         animations();
-        wallSlide();
-        wallJump();
         Attack();
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
-        {
-            //animator.SetBool("Dashing", isDashing);
-            StartCoroutine(Dash());
-        }
-
-        if (!isWallJumping)
-        {
-            facing();
-        } 
+        facing();
     }
 
     private void FixedUpdate()
     {
-        if (isDashing)
-        {
-            return;
-        }
-
-        if (!isWallJumping)
-        {
-            rb.velocity = new Vector2(hAxis * speed, rb.velocity.y);
-        }
+        rb.velocity = new Vector2(hAxis * speed, rb.velocity.y);
     }
 
     private bool isGrounded()
@@ -111,6 +76,7 @@ public class Rama_ctrl : MonoBehaviour
         if (isGrounded())
         {
             onGround = true;
+            airjumpCount = maxairjump;
         }
 
         else if (!isGrounded())
@@ -121,6 +87,12 @@ public class Rama_ctrl : MonoBehaviour
         if (Input.GetButtonDown("Jump") && onGround == true)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+        }
+
+        else if (Input.GetButtonDown("Jump") && onGround == false && airjumpCount > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower * 0.8f);
+            airjumpCount -= 1f;
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
@@ -158,11 +130,16 @@ public class Rama_ctrl : MonoBehaviour
         animator.SetFloat("Moving", Mathf.Abs(hAxis));
         animator.SetBool("onGround", onGround);
         animator.SetBool("Falling", falling);
-        animator.SetBool("onWall", onWall);
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.tag == "Enemy")
+        {
+            health.playerTakeDamage(1);
+            Debug.Log("Player hit and damage applied.");
+        }
+
         //if (col.tag == "Collectible")
         //{
         //    audioSource.clip = audioClips[0];
@@ -185,87 +162,11 @@ public class Rama_ctrl : MonoBehaviour
         }
     }
 
-    private bool isWalled()
-    {
-        return Physics2D.OverlapBox(wallCheck.position, wallchecksize, 0f, wallLayer);
-    }
-
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(groundCheck.position, groundchecksize);
-        Gizmos.DrawWireCube(wallCheck.position, wallchecksize);
         Gizmos.DrawWireCube(atkHitbox.position, atksize);
-    }
-
-    private void wallSlide()
-    {
-        if (isWalled() && hAxis != 0f && onGround == false)
-        {
-            onWall = true;
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallslidespeed, float.MaxValue));
-        }
-        else
-        {
-            onWall = false;
-        }
-    }
-
-    private void wallJump()
-    {
-        if (onWall == true)
-        {
-            isWallJumping = false;
-            wallJumpingDirection = -transform.localScale.x;
-            wallJumpingCounter = wallJumpingTime;
-
-            CancelInvoke(nameof(stopWallJumping));
-        }
-        else
-        {
-            wallJumpingCounter -= Time.deltaTime;
-        }
-
-        if (Input.GetButtonDown("Jump") && wallJumpingCounter > 0f)
-        {
-            isWallJumping = true;
-            rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
-            wallJumpingCounter = 0f;
-
-            if (transform.localScale.x != wallJumpingDirection)
-            {
-                isFacingRight = !isFacingRight;
-                Vector3 localscale = transform.localScale;
-                localscale.x *= -1f;
-                //BG.localScale = new Vector3(2, 2, 2);
-                transform.localScale = localscale;
-            }
-
-            Invoke(nameof(stopWallJumping), wallJumpingDuration);
-        }
-    }
-
-    void stopWallJumping()
-    {
-        isWallJumping = false;
-    }
-
-    private IEnumerator Dash()
-    {
-        canDash = false;
-        isDashing = true;
-        animator.SetBool("Dashing", isDashing);
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-        tr.emitting = true;
-        yield return new WaitForSeconds(dashingTime);
-        tr.emitting = false;
-        rb.gravityScale = originalGravity;
-        isDashing = false;
-        animator.SetBool("Dashing", isDashing);
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
     }
 
     void Attack()
@@ -279,25 +180,29 @@ public class Rama_ctrl : MonoBehaviour
             {
                 enemy.GetComponent<Enemy>().takedamage(atkdmg);
             }
+
+            fireballs[findFireball()].transform.position = firePoint.position;
+            fireballs[findFireball()].GetComponent<Aria_shot>().setDirection(Mathf.Sign(transform.localScale.x));
         }
     }
 
-    public void playertakedamage(float damage)
+    int findFireball()
     {
-        HP -= damage;
-        animator.SetTrigger("hurt");
-
-        if (HP <= 0)
+        for (int i = 0; i < fireballs.Length; i++)
         {
-            dead();
+            if (!fireballs[i].activeInHierarchy)
+            {
+                return i;
+            }
         }
+        return 0;
     }
 
-    void dead()
+    public void dead()
     {
-        animator.SetBool("dead", true);
+        animator.SetBool("Dead", true);
         Debug.Log("Player dead");
         //GetComponent<Collider2D>().enabled = false;
-        //this.enabled = false;
+        this.enabled = false;
     }
 }
