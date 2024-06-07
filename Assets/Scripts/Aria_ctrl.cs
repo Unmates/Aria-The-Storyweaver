@@ -20,6 +20,7 @@ public class Aria_ctrl : MonoBehaviour
 
     Rigidbody2D rb;
     Animator animator;
+    Health health;
 
     [SerializeField] bool onGround = false;
     [SerializeField] bool falling;
@@ -45,6 +46,7 @@ public class Aria_ctrl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        health= GetComponent<Health>();
         HP = maxHP;
     }
 
@@ -56,6 +58,7 @@ public class Aria_ctrl : MonoBehaviour
         animations();
         Attack();
         facing();
+        hurtanim();
     }
 
     private void FixedUpdate()
@@ -129,12 +132,16 @@ public class Aria_ctrl : MonoBehaviour
         animator.SetBool("Falling", falling);
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Enemy")
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
+        //if (col.tag == "Enemy")
+        //{   
+        //    if (enemy != null)
+        //    {
+        //        health.playerTakeDamage(1);
+        //        Debug.Log("Enemy hit and damage applied.");
+        //    }
+        //}
 
         //if (col.tag == "Collectible")
         //{
@@ -194,20 +201,22 @@ public class Aria_ctrl : MonoBehaviour
         return 0;
     }
 
-    public void playertakedamage(float damage)
+    public void hurtanim()
     {
-        HP -= damage;
-        animator.SetTrigger("hurt");
-
-        if (HP <= 0)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            dead();
+            animator.SetTrigger("Hurt");
+            Debug.Log(health.currentPlayerHp);
         }
+        //if (health.currentPlayerHp == 0)
+        //{
+        //    dead();
+        //}
     }
 
     void dead()
     {
-        animator.SetBool("dead", true);
+        //animator.SetBool("Dead", true);
         Debug.Log("Player dead");
         //GetComponent<Collider2D>().enabled = false;
         //this.enabled = false;

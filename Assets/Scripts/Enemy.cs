@@ -24,21 +24,29 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        // Check if player is within attack range
-        Transform player = FindObjectOfType<Player>().transform; // Assuming a Player script exists
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        //// Check if player is within attack range
+        //Transform player = FindObjectOfType<Player>().transform; // Assuming a Player script exists
+        //float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (distanceToPlayer <= attackRange)
+        //if (distanceToPlayer <= attackRange)
+        //{
+        //    // If player is in range and attack cooldown is ready, attack
+        //    if (Time.time >= nextAttackTime)
+        //    {
+        //        AttackPlayer();
+        //        nextAttackTime = Time.time + 1f / attackRate; // Reset attack cooldown timer
+        //    }
+
+        //    // Optional: Face the player while attacking (consider using Lerp for smooth turning)
+        //    transform.rotation = Quaternion.LookRotation(player.position - transform.position);
+        //}
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag == "Player")
         {
-            // If player is in range and attack cooldown is ready, attack
-            if (Time.time >= nextAttackTime)
-            {
-                AttackPlayer();
-                nextAttackTime = Time.time + 1f / attackRate; // Reset attack cooldown timer
-            }
-
-            // Optional: Face the player while attacking (consider using Lerp for smooth turning)
-            transform.rotation = Quaternion.LookRotation(player.position - transform.position);
+            col.GetComponent<Health>().playerTakeDamage(damage);
         }
     }
 
@@ -73,7 +81,7 @@ public class Enemy : MonoBehaviour
             {
                 if (collider.gameObject.tag == "Player") // Replace "Player" with your player's tag
                 {
-                    collider.gameObject.GetComponent<Aria_ctrl>().playertakedamage(damage); // Assuming a Player script with TakeDamage method
+                    //collider.gameObject.GetComponent<Aria_ctrl>().playertakedamage(damage); // Assuming a Player script with TakeDamage method
                     break; // Stop after damaging the Player
                 }
             }
