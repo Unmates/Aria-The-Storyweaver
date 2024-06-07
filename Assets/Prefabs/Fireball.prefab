@@ -194,4 +194,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   atkdmg: 50
-  speed: 3
+  speed: 8
