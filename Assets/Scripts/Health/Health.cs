@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    [Header("Health")]
     [SerializeField] float maxHealth;
     [SerializeField] public float currentPlayerHp;
+
+    [Header("iFrames")]
+    [SerializeField] float invulDur;
+    [SerializeField] int numberOfFlashes;
+    SpriteRenderer spriteRend;
 
     [Header ("Player object")]
     [SerializeField] GameObject aria_obj;

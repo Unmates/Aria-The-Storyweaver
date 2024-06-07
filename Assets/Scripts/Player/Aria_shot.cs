@@ -9,6 +9,7 @@ public class Aria_shot : MonoBehaviour
     [SerializeField] float speed = 3f;
     float direction;
     float lifetime;
+    SpriteRenderer spriteRend;
 
     bool hit;
 
