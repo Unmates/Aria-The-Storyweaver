@@ -1263,8 +1263,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxhp: 100
-  damage: 0
-  attackRate: 1
+  damage: 1
+  attackRate: 2
   boxCollider: {fileID: 472807842}
   range: 1.54
   colliderDistance: 0.25

@@ -62,8 +62,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.9278739, y: -0.43860865, z: 0.045096476}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7793756718813366870}
   - {fileID: 1057560380738909161}
@@ -111,12 +111,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1201232941, guid: 7d7f9836381db834bb9b3d6fb327527f, type: 3}
+  m_Sprite: {fileID: -599343337, guid: 9c281f0c5981de54da2b76b500a4318a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.2, y: 1.41}
+  m_Size: {x: 120, y: 141}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -175,18 +175,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0583148, y: -0.013884425}
+  m_Offset: {x: -4.3256054, y: -1.9001465}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.2, y: 1.41}
-    newSize: {x: 1.2, y: 1.41}
+    oldSize: {x: 120, y: 141}
+    newSize: {x: 120, y: 141}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.83900404, y: 1.4377689}
+  m_Size: {x: 81.83981, y: 134.40335}
   m_EdgeRadius: 0
 --- !u!50 &4555103563781657196
 Rigidbody2D:
@@ -233,7 +233,7 @@ MonoBehaviour:
   airjumpCount: 1
   maxairjump: 1
   atkdmg: 50
-  groundchecksize: {x: 0.75, y: 0.2}
+  groundchecksize: {x: 0.6, y: 0.2}
   atksize: {x: 0, y: 0}
   onGround: 0
   falling: 0
@@ -252,6 +252,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  fireballPrefab: {fileID: 6092849755308910371, guid: a3d559981e296ae4cb323b866c091475, type: 3}
   groundLayer:
     serializedVersion: 2
     m_Bits: 72
@@ -315,7 +316,7 @@ Transform:
   m_GameObject: {fileID: 3158761191575386937}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.862, y: 0.226, z: 0}
+  m_LocalPosition: {x: 114.5, y: 16.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -448,6 +449,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentPlayerHp: 0
+  invulDur: 0
+  numberOfFlashes: 0
   aria_obj: {fileID: 1268058463448395002}
   rama_obj: {fileID: 8713855185390797576}
 --- !u!1 &8521485465448843383
@@ -475,7 +478,7 @@ Transform:
   m_GameObject: {fileID: 8521485465448843383}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.055, y: -0.75, z: -0.03288239}
+  m_LocalPosition: {x: -4.1, y: -69.4, z: -0.03288239}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

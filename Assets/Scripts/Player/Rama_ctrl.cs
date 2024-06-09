@@ -287,6 +287,6 @@ public class Rama_ctrl : MonoBehaviour
         animator.SetBool("Dead", true);
         Debug.Log("Player dead");
         //GetComponent<Collider2D>().enabled = false;
-        this.enabled = false;
+        //this.enabled = false;
     }
 }
