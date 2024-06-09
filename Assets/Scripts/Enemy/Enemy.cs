@@ -12,7 +12,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] float attackRate;
     [SerializeField] BoxCollider2D boxCollider;
-    float range;
+    [SerializeField] float range;
+    [SerializeField] float colliderDistance;
     float cooldownTimer = Mathf.Infinity;
 
     public Animator animator;
@@ -68,8 +69,8 @@ public class Enemy : MonoBehaviour
 
     bool playerClose()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range * transform.localScale.x, 
-            boxCollider.bounds.size, 0 , Vector2.left, 0, playerLayer);
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance, 
+            new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z), 0 , Vector2.left, 0, playerLayer);
 
         return hit.collider != null;
     }
@@ -77,6 +78,7 @@ public class Enemy : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range, boxCollider.bounds.size);
+        Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance,
+            new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z));
     }
 }

@@ -1115,7 +1115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &472807840
 Transform:
   m_ObjectHideFlags: 0
@@ -1265,12 +1265,14 @@ MonoBehaviour:
   maxhp: 100
   damage: 0
   attackRate: 1
-  boxCollider: {fileID: 0}
+  boxCollider: {fileID: 472807842}
+  range: 1.54
+  colliderDistance: 0.25
   animator: {fileID: 472807841}
   playerhp: {fileID: 2087005953}
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3088,6 +3090,8 @@ MonoBehaviour:
   damage: 0
   attackRate: 1
   boxCollider: {fileID: 0}
+  range: 0
+  colliderDistance: 0
   animator: {fileID: 0}
   playerhp: {fileID: 0}
   playerLayer:
