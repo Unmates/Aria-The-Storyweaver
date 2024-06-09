@@ -33,6 +33,7 @@ public class Aria_ctrl : MonoBehaviour
 
     [SerializeField] GameObject healthobj;
     [SerializeField] GameObject[] fireballs;
+    [SerializeField] GameObject fireballPrefab;
 
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask enemyLayer;
@@ -49,6 +50,16 @@ public class Aria_ctrl : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         health = healthobj.GetComponent<Health>();
         HP = maxHP;
+        SpawnFireball();
+    }
+
+    void SpawnFireball()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            fireballs[i] = Instantiate(fireballPrefab);
+            fireballs[i].SetActive(false);
+        }
     }
 
     void Update()

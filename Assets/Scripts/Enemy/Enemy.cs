@@ -10,15 +10,17 @@ public class Enemy : MonoBehaviour
     [SerializeField] float damage;
     float currenthp;
 
-    [SerializeField] float attackRange = 1.5f; // Adjustable attack distance
-    [SerializeField] float attackRate = 1.0f; // Adjustable attack speed (attacks per second)
-    float nextAttackTime = 0f;  // Timer for attack cooldown
+    [SerializeField] float attackRate;
+    [SerializeField] BoxCollider2D boxCollider;
+    float range;
+    float cooldownTimer = Mathf.Infinity;
 
     public Animator animator;
-    public Transform attackPoint; // Optional: Reference to the enemy's attack point
 
     [SerializeField] GameObject playerhp;
     Health health;
+
+    [SerializeField] LayerMask playerLayer;
 
     private void Start()
     {
@@ -29,22 +31,12 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        //// Check if player is within attack range
-        //Transform player = FindObjectOfType<Player>().transform; // Assuming a Player script exists
-        //float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        cooldownTimer += Time.deltaTime;
 
-        //if (distanceToPlayer <= attackRange)
-        //{
-        //    // If player is in range and attack cooldown is ready, attack
-        //    if (Time.time >= nextAttackTime)
-        //    {
-        //        AttackPlayer();
-        //        nextAttackTime = Time.time + 1f / attackRate; // Reset attack cooldown timer
-        //    }
-
-        //    // Optional: Face the player while attacking (consider using Lerp for smooth turning)
-        //    transform.rotation = Quaternion.LookRotation(player.position - transform.position);
-        //}
+        if (cooldownTimer >= attackRate)
+        {
+            //atk
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -74,27 +66,17 @@ public class Enemy : MonoBehaviour
         this.enabled = false;
     }
 
-    void AttackPlayer()
+    bool playerClose()
     {
-        animator.SetTrigger("attack"); // Trigger attack animation
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range * transform.localScale.x, 
+            boxCollider.bounds.size, 0 , Vector2.left, 0, playerLayer);
 
-        // Handle attack logic (consider using a SphereCast for more precise collision detection):
-        if (attackPoint != null) // Check if attackPoint is assigned (optional)
-        {
-            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
-            foreach (Collider2D collider in hitColliders)
-            {
-                if (collider.gameObject.tag == "Player") // Replace "Player" with your player's tag
-                {
-                    //collider.gameObject.GetComponent<Aria_ctrl>().playertakedamage(damage); // Assuming a Player script with TakeDamage method
-                    break; // Stop after damaging the Player
-                }
-            }
-        }
-        else
-        {
-            // Handle attack collision without attackPoint (e.g., apply damage to Player directly)
-            // ... (replace with your preferred attack collision handling)
-        }
+        return hit.collider != null;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range, boxCollider.bounds.size);
     }
 }
