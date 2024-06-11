@@ -2510,6 +2510,22 @@ PrefabInstance:
       propertyPath: numberOfFlashes
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6098495551839965927, guid: 492257a81d8ab6e488672c9554736651, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098495551839965927, guid: 492257a81d8ab6e488672c9554736651, type: 3}
+      propertyPath: m_Emitting
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098495551839965927, guid: 492257a81d8ab6e488672c9554736651, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 6098495551839965927, guid: 492257a81d8ab6e488672c9554736651, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6698046572027372588, guid: 492257a81d8ab6e488672c9554736651, type: 3}
       propertyPath: m_Name
       value: Player

@@ -29,7 +29,7 @@ public class Aria_shot : MonoBehaviour
     {
         if (hit) { return; }
         float moveSpeed = speed * Time.deltaTime * direction;
-        transform.Translate(0, -moveSpeed, 0);
+        transform.Translate(moveSpeed, 0, 0);
 
         lifetime += Time.deltaTime;
         if (lifetime > 5f)
@@ -53,7 +53,7 @@ public class Aria_shot : MonoBehaviour
                 Debug.LogWarning("No Enemy component found on the collided object with tag 'Enemy'.");
             }
         }
-        else if (col.tag == "Player" || col.tag == "Background")
+        else if (col.tag == "Player" || col.tag == "Background" || col.tag == "Projectile")
         {
             return;
         }
@@ -70,13 +70,13 @@ public class Aria_shot : MonoBehaviour
         hit = false;
         boxCollider2d.enabled = true;
 
-        float localScaleY = transform.localScale.y;
-        if (Mathf.Sign(localScaleY) != _direction)
+        float localScaleX = transform.localScale.x;
+        if (Mathf.Sign(localScaleX) != _direction)
         {
-            localScaleY = -localScaleY;
+            localScaleX = -localScaleX;
         }
 
-        transform.localScale = new Vector3(transform.localScale.x, localScaleY, transform.localScale.z);
+        transform.localScale = new Vector3(localScaleX, transform.localScale.y, transform.localScale.z);
     }
 
     void deactivate()

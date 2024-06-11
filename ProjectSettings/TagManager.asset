@@ -8,6 +8,7 @@ TagManager:
   - MGround
   - Enemy
   - Background
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Wall
   - Enemy
   - Player
-  - 
+  - Projectile
   - 
   - 
   - 
