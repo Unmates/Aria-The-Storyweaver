@@ -5,7 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [Header("Health")]
-    [SerializeField] float maxHealth;
+    [SerializeField] public float maxHealth;
     [SerializeField] public float currentPlayerHp;
 
     [Header("iFrames")]
