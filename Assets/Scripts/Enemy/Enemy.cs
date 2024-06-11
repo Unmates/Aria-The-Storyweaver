@@ -76,6 +76,7 @@ public class Enemy : MonoBehaviour
         Debug.Log("Enemy dead");
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
+        enemyPatrol.enabled = false;
     }
 
     bool playerClose()
