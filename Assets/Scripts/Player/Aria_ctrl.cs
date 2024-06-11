@@ -7,8 +7,6 @@ public class Aria_ctrl : MonoBehaviour
 {
     float hAxis;
 
-    [SerializeField] float maxHP = 200f;
-    float HP;
     [SerializeField] float speed = 3f;
     [SerializeField] float jumpPower = 3f;
     [SerializeField] float airjumpCount = 1f;
@@ -50,7 +48,6 @@ public class Aria_ctrl : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         health = healthobj.GetComponent<Health>();
-        HP = maxHP;
         SpawnFireball();
     }
 

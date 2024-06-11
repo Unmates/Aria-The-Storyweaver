@@ -8,8 +8,6 @@ public class Rama_ctrl : MonoBehaviour
     float hAxis;
     [SerializeField] Vector2 wallJumpingPower = new Vector2(8f, 16f);
 
-    [SerializeField] float maxHP = 200f;
-    float HP;
     [SerializeField] float speed = 3f;
     [SerializeField] float jumpPower = 3f;
     [SerializeField] float wallslidespeed = 2f;
@@ -53,12 +51,15 @@ public class Rama_ctrl : MonoBehaviour
     [SerializeField] AudioClip[] audioClips;
     AudioSource audioSource;
 
+    int attackStep = 0;
+    float timeSinceLastAttack = 0f;
+    [SerializeField] float attackResetTime = 1f; // Time to reset the attack sequence
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        HP = maxHP;
     }
 
     void Update()
@@ -270,15 +271,53 @@ public class Rama_ctrl : MonoBehaviour
 
     void Attack()
     {
+        timeSinceLastAttack += Time.deltaTime;
+
         if (Input.GetKeyDown(KeyCode.J))
         {
-            animator.SetTrigger("Attack");
-            Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(atkHitbox.position, atksize, 0f, enemyLayer);
-
-            foreach(Collider2D enemy in hitEnemies)
+            if (timeSinceLastAttack >= attackResetTime)
             {
-                enemy.GetComponent<Enemy>().takedamage(atkdmg);
+                attackStep = 0;
             }
+
+            SequenceAttack();
+            timeSinceLastAttack = 0f;
+        }
+    }
+
+    void SequenceAttack()
+    {
+        if (attackStep == 0)
+        {
+            animator.SetTrigger("Attack1");
+            PerformAttack();
+            attackStep++;
+        }
+        else if (attackStep == 1 && onGround)
+        {
+            animator.SetTrigger("Attack2");
+            PerformAttack();
+            attackStep++;
+        }
+        else if (attackStep == 2 && onGround)
+        {
+            animator.SetTrigger("Attack3");
+            PerformAttack();
+            attackStep = 0;
+        }
+        else if (!onGround)
+        {
+            attackStep = 0;
+        }
+    }
+
+    void PerformAttack()
+    {
+        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(atkHitbox.position, atksize, 0f, enemyLayer);
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            enemy.GetComponent<Enemy>().takedamage(atkdmg);
         }
     }
 
