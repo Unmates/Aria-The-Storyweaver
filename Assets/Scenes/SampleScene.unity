@@ -2522,8 +2522,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5944617821592425599, guid: 492257a81d8ab6e488672c9554736651, type: 3}
+      propertyPath: invulDur
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944617821592425599, guid: 492257a81d8ab6e488672c9554736651, type: 3}
       propertyPath: maxHealth
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944617821592425599, guid: 492257a81d8ab6e488672c9554736651, type: 3}
+      propertyPath: numberOfFlashes
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6698046572027372588, guid: 492257a81d8ab6e488672c9554736651, type: 3}
       propertyPath: m_Name
