@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7f2f08c8fb206ea43915d5df8d2f66cb
+guid: 5285618fea87e224392dc941a49507da
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,64 +97,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sprite_Character_Aria Idle_0
+      name: Character_Aria_Attack_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 3
-        width: 40
-        height: 47
+        x: 0
+        y: 0
+        width: 150
+        height: 141
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbbd27ccb0c015d4983d5912b995ab45
-      internalID: 972984369
+      spriteID: cd6f2427fadae4946ab1a4fe93b0bc08
+      internalID: -729620172
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite_Character_Aria Idle_1
+      name: Character_Aria_Attack_1
       rect:
         serializedVersion: 2
-        x: 58
-        y: 3
-        width: 40
-        height: 47
+        x: 210
+        y: 0
+        width: 171
+        height: 141
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e749dba3fd99fab45aa948ddfc806803
-      internalID: -443203185
+      spriteID: 164fc982fb0fdd749af876349535f0ad
+      internalID: -256311298
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite_Character_Aria Idle_2
+      name: Character_Aria_Attack_2
       rect:
         serializedVersion: 2
-        x: 106
-        y: 3
-        width: 40
-        height: 47
+        x: 444
+        y: 0
+        width: 171
+        height: 141
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ddb689cbbb973243a46e4f9a7b9e2a1
-      internalID: 71591836
+      spriteID: 9c48dcac2364a924b9a307a545e828e1
+      internalID: 1192576916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Aria_Attack_3
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 0
+        width: 177
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27e87756aabb57b439a2ac79f96f08a6
+      internalID: 1121328072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Aria_Attack_5
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 0
+        width: 129
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f123ee6c554f8c44bf53c15e4fbd9fe
+      internalID: -348728014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Aria_Attack_6
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 0
+        width: 120
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff4c33293cafd3440811f4372895dbf8
+      internalID: 891008050
       vertices: []
       indices: 
       edges: []
@@ -170,9 +233,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Sprite_Character_Aria Idle_0: 972984369
-      Sprite_Character_Aria Idle_1: -443203185
-      Sprite_Character_Aria Idle_2: 71591836
+      Character_Aria_Attack_0: -729620172
+      Character_Aria_Attack_1: -256311298
+      Character_Aria_Attack_10: -2086104144
+      Character_Aria_Attack_11: 1227456532
+      Character_Aria_Attack_2: 1192576916
+      Character_Aria_Attack_3: 1121328072
+      Character_Aria_Attack_4: -353497431
+      Character_Aria_Attack_5: -348728014
+      Character_Aria_Attack_6: 891008050
+      Character_Aria_Attack_7: -1707329935
+      Character_Aria_Attack_8: 134819876
+      Character_Aria_Attack_9: 1855311620
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

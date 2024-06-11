@@ -24,6 +24,7 @@ public class Aria_ctrl : MonoBehaviour
 
     [SerializeField] bool onGround = false;
     [SerializeField] bool falling;
+    bool isDoubleJump;
     bool isFacingRight = true;
 
     //[SerializeField] Transform BG;
@@ -87,6 +88,7 @@ public class Aria_ctrl : MonoBehaviour
         if (isGrounded())
         {
             onGround = true;
+            isDoubleJump = false;
             airjumpCount = maxairjump;
         }
 
@@ -102,6 +104,7 @@ public class Aria_ctrl : MonoBehaviour
 
         else if (Input.GetButtonDown("Jump") && onGround == false && airjumpCount > 0f)
         {
+            isDoubleJump = true;
             rb.velocity = new Vector2(rb.velocity.x, jumpPower * 0.8f);
             airjumpCount -= 1f;
         }
@@ -141,6 +144,7 @@ public class Aria_ctrl : MonoBehaviour
         animator.SetFloat("Moving", Mathf.Abs(hAxis));
         animator.SetBool("onGround", onGround);
         animator.SetBool("Falling", falling);
+        animator.SetBool("Double", isDoubleJump);
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -214,6 +218,6 @@ public class Aria_ctrl : MonoBehaviour
         animator.SetBool("Dead", true);
         Debug.Log("Player dead");
         //GetComponent<Collider2D>().enabled = false;
-        this.enabled = false;
+        //this.enabled = false;
     }
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7d7f9836381db834bb9b3d6fb327527f
+guid: e296d24618443334f88caf3be8ebc853
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 1
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,64 +97,148 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Character_Aria_Sprite_Idle_0
+      name: Character_Aria_Run_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 120
-        height: 141
+        y: 9
+        width: 138
+        height: 135
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60ba595dd02c5ac4abb16877ae9066d6
-      internalID: -1201232941
+      spriteID: 7221e82526583e74db7fc100a26f635e
+      internalID: 436009522
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_Aria_Sprite_Idle_1
+      name: Character_Aria_Run_1
       rect:
         serializedVersion: 2
-        x: 153
-        y: 0
-        width: 120
+        x: 225
+        y: 3
+        width: 144
         height: 138
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: acce9a13546685141afb2c373b7d27fc
-      internalID: -1020726143
+      spriteID: 72439965b9560bd4895b049bd1b93304
+      internalID: -356348283
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_Aria_Sprite_Idle_2
+      name: Character_Aria_Run_2
       rect:
         serializedVersion: 2
-        x: 297
+        x: 438
         y: 0
-        width: 120
-        height: 141
+        width: 144
+        height: 138
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc744de2c89fb4b49a156a469c517ab8
-      internalID: -1933684053
+      spriteID: 852c8959f2025814bacc7aa735d00a5f
+      internalID: -1986948589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Aria_Run_3
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 3
+        width: 144
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ee73380dfb87794780319536ddf6378
+      internalID: -1673316560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Aria_Run_4
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 3
+        width: 135
+        height: 141
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0de2cfec5ec9374da420c6846831b9b
+      internalID: 51687478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Aria_Run_5
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 6
+        width: 132
+        height: 135
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 844e8214d1ac762468e26c726df358f8
+      internalID: -807509091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Aria_Run_6
+      rect:
+        serializedVersion: 2
+        x: 1287
+        y: 0
+        width: 138
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98bcefe504fda3c4bb0c70012ece5745
+      internalID: 1463775456
       vertices: []
       indices: 
       edges: []
@@ -170,9 +254,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Character_Aria_Sprite_Idle_0: -1201232941
-      Character_Aria_Sprite_Idle_1: -1020726143
-      Character_Aria_Sprite_Idle_2: -1933684053
+      Character_Aria_Run_0: 436009522
+      Character_Aria_Run_1: -356348283
+      Character_Aria_Run_2: -1986948589
+      Character_Aria_Run_3: -1673316560
+      Character_Aria_Run_4: 51687478
+      Character_Aria_Run_5: -807509091
+      Character_Aria_Run_6: 1463775456
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

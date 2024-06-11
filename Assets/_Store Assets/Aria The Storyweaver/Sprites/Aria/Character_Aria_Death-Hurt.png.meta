@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8f112366674af444b91dc2db42acc763
+guid: 53b2a7d5e09add04fad3c5fc9dece59b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,127 +97,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sprite_Character_Aria Attack_0
+      name: Character_Aria_Death-Hurt_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 5
-        width: 50
-        height: 47
+        x: 0
+        y: 9
+        width: 162
+        height: 141
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa5e306236e26344993da592c7b0e442
-      internalID: -1967934151
+      spriteID: aadf9910745767f469860c0b267bc19d
+      internalID: -2050707287
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite_Character_Aria Attack_2
+      name: Character_Aria_Death-Hurt_1
       rect:
         serializedVersion: 2
-        x: 68
-        y: 5
-        width: 57
-        height: 46
+        x: 231
+        y: 9
+        width: 162
+        height: 141
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53f9f4bd59f043c4495c313358fbc85b
-      internalID: -531024571
+      spriteID: 6505de8a0073d194889bb623af35a2d7
+      internalID: 453185804
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite_Character_Aria Attack_3
+      name: Character_Aria_Death-Hurt_2
       rect:
         serializedVersion: 2
-        x: 136
-        y: 5
-        width: 58
-        height: 46
+        x: 471
+        y: 18
+        width: 147
+        height: 132
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: faed6eb8f60b9d847b5a5b40f28becbf
-      internalID: -778413952
+      spriteID: d66dface0d7f8494f879e743466ff041
+      internalID: -1990079258
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite_Character_Aria Attack_5
+      name: Character_Aria_Death-Hurt_3
       rect:
         serializedVersion: 2
-        x: 199
-        y: 5
-        width: 58
-        height: 47
+        x: 708
+        y: 30
+        width: 126
+        height: 114
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2439df36fa38f074c92d942a0bff8857
-      internalID: 323542969
+      spriteID: 526da0f1b98d9ff4bb2aeb9a393b0379
+      internalID: -1719774618
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite_Character_Aria Attack_6
+      name: Character_Aria_Death-Hurt_4
       rect:
         serializedVersion: 2
-        x: 258
-        y: 5
-        width: 43
-        height: 47
+        x: 921
+        y: 6
+        width: 153
+        height: 87
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb98cae9664fdba4dad41840551cec1c
-      internalID: -540503530
+      spriteID: c3d57a939b84ecf45803315967bcef8b
+      internalID: -2094977582
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite_Character_Aria Attack_7
+      name: Character_Aria_Death-Hurt_5
       rect:
         serializedVersion: 2
-        x: 314
-        y: 5
-        width: 40
-        height: 47
+        x: 1188
+        y: 0
+        width: 165
+        height: 60
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ede59c2ae5441bd4d962fd6a535a9427
-      internalID: 1429747710
+      spriteID: c38ae6130a8796c4aaf1f59ff0641343
+      internalID: 2118600721
       vertices: []
       indices: 
       edges: []
@@ -233,14 +233,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Sprite_Character_Aria Attack_0: -1967934151
-      Sprite_Character_Aria Attack_1: -1430220403
-      Sprite_Character_Aria Attack_2: -531024571
-      Sprite_Character_Aria Attack_3: -778413952
-      Sprite_Character_Aria Attack_4: 1298400587
-      Sprite_Character_Aria Attack_5: 323542969
-      Sprite_Character_Aria Attack_6: -540503530
-      Sprite_Character_Aria Attack_7: 1429747710
+      Character_Aria_Death-Hurt_0: -2050707287
+      Character_Aria_Death-Hurt_1: 453185804
+      Character_Aria_Death-Hurt_2: -1990079258
+      Character_Aria_Death-Hurt_3: -1719774618
+      Character_Aria_Death-Hurt_4: -2094977582
+      Character_Aria_Death-Hurt_5: 2118600721
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
