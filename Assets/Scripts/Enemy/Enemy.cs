@@ -26,6 +26,9 @@ public class Enemy : MonoBehaviour
     EnemyPatrol enemyPatrol;
     bool isAttacking = false;
 
+    [Header("Sound")]
+    [SerializeField] AudioClip attackSound;
+
     private void Start()
     {
         currenthp = maxhp;
@@ -43,6 +46,7 @@ public class Enemy : MonoBehaviour
             if (cooldownTimer >= attackRate)
             {
                 cooldownTimer = 0;
+                SoundsManager.instance.PlaySound(attackSound);
                 animator.SetTrigger("attack");
                 isAttacking = true;
             }

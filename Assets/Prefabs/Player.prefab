@@ -227,18 +227,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c5bf73eb663844a9df6588355c1d9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 200
   speed: 5
   jumpPower: 10
   airjumpCount: 1
   maxairjump: 1
-  atkdmg: 50
   groundchecksize: {x: 0.6, y: 0.2}
-  atksize: {x: 0, y: 0}
   onGround: 0
   falling: 0
   groundCheck: {fileID: 7793756718813366870}
-  atkHitbox: {fileID: 1057560380738909161}
   firePoint: {fileID: 379783792615087970}
   healthobj: {fileID: 6698046572027372588}
   fireballs:
@@ -259,7 +255,8 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  audioClips: []
+  fireballsSound: {fileID: 8300000, guid: 3c1fc02001dcaf84f9a10cdeb70467ec, type: 3}
+  jumpSound: {fileID: 8300000, guid: 4cb68d49678e18c4db246719ddf0797f, type: 3}
 --- !u!1 &2793655641617441010
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,6 +450,8 @@ MonoBehaviour:
   numberOfFlashes: 0
   aria_obj: {fileID: 1268058463448395002}
   rama_obj: {fileID: 8713855185390797576}
+  hurtSound: {fileID: 0}
+  deadSound: {fileID: 0}
 --- !u!1 &8521485465448843383
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,7 +660,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallJumpingPower: {x: 10, y: 16}
-  maxHP: 200
   speed: 5
   jumpPower: 10
   wallslidespeed: 1
@@ -674,6 +672,7 @@ MonoBehaviour:
   onGround: 0
   onWall: 0
   falling: 0
+  healthobj: {fileID: 0}
   groundCheck: {fileID: 2470604039900692719}
   wallCheck: {fileID: 4309037875176686320}
   atkHitbox: {fileID: 7679685648237666679}
@@ -687,7 +686,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   tr: {fileID: 6098495551839965927}
-  audioClips: []
+  attackResetTime: 1
+  slashSound: {fileID: 8300000, guid: 55e50340b17b1b94ebc79c189a1581ad, type: 3}
+  jumpSound: {fileID: 8300000, guid: 4cb68d49678e18c4db246719ddf0797f, type: 3}
 --- !u!95 &2293411811373330563
 Animator:
   serializedVersion: 5
@@ -717,7 +718,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8713855185390797576}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -730,7 +731,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -761,7 +762,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.5
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -820,5 +821,5 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_MaskInteraction: 0
   m_Autodestruct: 0
-  m_Emitting: 1
+  m_Emitting: 0
   m_ApplyActiveColorSpace: 1

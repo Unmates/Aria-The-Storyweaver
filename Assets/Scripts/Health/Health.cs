@@ -23,6 +23,10 @@ public class Health : MonoBehaviour
     Animator rama_anim;
     Rama_ctrl rama_Ctrl;
 
+    [Header("Audio")]
+    [SerializeField] AudioClip hurtSound;
+    [SerializeField] AudioClip deadSound;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -49,12 +53,14 @@ public class Health : MonoBehaviour
 
         if (currentPlayerHp > 0)
         {
+            SoundsManager.instance.PlaySound(hurtSound);
             aria_anim.SetTrigger("Hurt");
             rama_anim.SetTrigger("Hurt");
             StartCoroutine(Invul());
         }
         else
         {
+            SoundsManager.instance.PlaySound(deadSound);
             aria_Ctrl.dead();
             rama_Ctrl.dead();
         }

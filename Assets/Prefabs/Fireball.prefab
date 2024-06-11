@@ -195,3 +195,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atkdmg: 50
   speed: 8
+  explodeSound: {fileID: 8300000, guid: 4ac4d52dbabae9940bc385592265aa16, type: 3}

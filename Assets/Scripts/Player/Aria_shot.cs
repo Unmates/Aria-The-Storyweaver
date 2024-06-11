@@ -17,6 +17,8 @@ public class Aria_shot : MonoBehaviour
     BoxCollider2D boxCollider2d;
     Enemy enemy;
 
+    [SerializeField] AudioClip explodeSound;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -46,6 +48,7 @@ public class Aria_shot : MonoBehaviour
             if (enemy != null)
             {
                 enemy.takedamage(atkdmg);
+                SoundsManager.instance.PlaySound(explodeSound);
                 Debug.Log("Enemy hit and damage applied.");
             }
             else

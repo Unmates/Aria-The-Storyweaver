@@ -11,10 +11,8 @@ public class Aria_ctrl : MonoBehaviour
     [SerializeField] float jumpPower = 3f;
     [SerializeField] float airjumpCount = 1f;
     [SerializeField] float maxairjump = 1f;
-    [SerializeField] float atkdmg = 50f;
 
     [SerializeField] Vector2 groundchecksize;
-    [SerializeField] Vector2 atksize;
 
     Rigidbody2D rb;
     Animator animator;
@@ -25,9 +23,7 @@ public class Aria_ctrl : MonoBehaviour
     bool isDoubleJump;
     bool isFacingRight = true;
 
-    //[SerializeField] Transform BG;
     [SerializeField] Transform groundCheck;
-    [SerializeField] Transform atkHitbox;
     [SerializeField] Transform firePoint;
 
     [SerializeField] GameObject healthobj;
@@ -37,27 +33,16 @@ public class Aria_ctrl : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask enemyLayer;
 
-    //[SerializeField] Lives liveScript;
-
-    [SerializeField] AudioClip[] audioClips;
-    AudioSource audioSource;
+    [Header("Audio")]
+    [SerializeField] AudioClip fireballsSound;
+    [SerializeField] AudioClip jumpSound;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
         health = healthobj.GetComponent<Health>();
         SpawnFireball();
-    }
-
-    void SpawnFireball()
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            fireballs[i] = Instantiate(fireballPrefab);
-            fireballs[i].SetActive(false);
-        }
     }
 
     void Update()
@@ -97,6 +82,7 @@ public class Aria_ctrl : MonoBehaviour
         if (Input.GetButtonDown("Jump") && onGround == true)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            SoundsManager.instance.PlaySound(jumpSound);
         }
 
         else if (Input.GetButtonDown("Jump") && onGround == false && airjumpCount > 0f)
@@ -104,6 +90,7 @@ public class Aria_ctrl : MonoBehaviour
             isDoubleJump = true;
             rb.velocity = new Vector2(rb.velocity.x, jumpPower * 0.8f);
             airjumpCount -= 1f;
+            SoundsManager.instance.PlaySound(jumpSound);
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
@@ -132,7 +119,6 @@ public class Aria_ctrl : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
-            //BG.localScale = new Vector3(2, 2, 2);
         }
     }
 
@@ -151,12 +137,6 @@ public class Aria_ctrl : MonoBehaviour
             health.playerTakeDamage(1);
             Debug.Log("Player hit and damage applied.");
         }
-
-        //if (col.tag == "Collectible")
-        //{
-        //    audioSource.clip = audioClips[0];
-        //    audioSource.Play();
-        //}
 
         if (col.tag == "MGround")
         {
@@ -178,20 +158,14 @@ public class Aria_ctrl : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(groundCheck.position, groundchecksize);
-        Gizmos.DrawWireCube(atkHitbox.position, atksize);
     }
 
     void Attack()
     {
         if (Input.GetKeyDown(KeyCode.J))
         {
+            SoundsManager.instance.PlaySound(fireballsSound);
             animator.SetTrigger("Attack");
-            Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(atkHitbox.position, atksize, 0f, enemyLayer);
-
-            foreach(Collider2D enemy in hitEnemies)
-            {
-                enemy.GetComponent<Enemy>().takedamage(atkdmg);
-            }
 
             fireballs[findFireball()].transform.position = firePoint.position;
             fireballs[findFireball()].GetComponent<Aria_shot>().setDirection(Mathf.Sign(transform.localScale.x));
@@ -208,6 +182,14 @@ public class Aria_ctrl : MonoBehaviour
             }
         }
         return 0;
+    }
+    void SpawnFireball()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            fireballs[i] = Instantiate(fireballPrefab);
+            fireballs[i].SetActive(false);
+        }
     }
 
     public void dead()

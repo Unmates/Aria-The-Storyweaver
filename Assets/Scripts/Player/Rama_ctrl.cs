@@ -26,6 +26,7 @@ public class Rama_ctrl : MonoBehaviour
 
     Rigidbody2D rb;
     Animator animator;
+    Health health;
 
     [SerializeField] bool onGround = false;
     [SerializeField] bool onWall = false;
@@ -33,9 +34,10 @@ public class Rama_ctrl : MonoBehaviour
     bool isFacingRight = true;
     bool isWallJumping;
     bool canDash = true;
-    bool isDashing; 
+    bool isDashing;
 
-    //[SerializeField] Transform BG;
+    [SerializeField] GameObject healthobj;
+
     [SerializeField] Transform groundCheck;
     [SerializeField] Transform wallCheck;
     [SerializeField] Transform atkHitbox;
@@ -44,22 +46,21 @@ public class Rama_ctrl : MonoBehaviour
     [SerializeField] LayerMask wallLayer;
     [SerializeField] LayerMask enemyLayer;
 
-    //[SerializeField] Lives liveScript;
-
     [SerializeField] TrailRenderer tr;
-
-    [SerializeField] AudioClip[] audioClips;
-    AudioSource audioSource;
 
     int attackStep = 0;
     float timeSinceLastAttack = 0f;
     [SerializeField] float attackResetTime = 1f; // Time to reset the attack sequence
 
+    [Header("Audio")]
+    [SerializeField] AudioClip slashSound;
+    [SerializeField] AudioClip jumpSound;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
+        health = healthobj.GetComponent<Health>();
     }
 
     void Update()
@@ -79,7 +80,6 @@ public class Rama_ctrl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
-            //animator.SetBool("Dashing", isDashing);
             StartCoroutine(Dash());
         }
 
@@ -122,6 +122,7 @@ public class Rama_ctrl : MonoBehaviour
         if (Input.GetButtonDown("Jump") && onGround == true)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            SoundsManager.instance.PlaySound(jumpSound);
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
@@ -150,7 +151,6 @@ public class Rama_ctrl : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
-            //BG.localScale = new Vector3(2, 2, 2);
         }
     }
 
@@ -164,11 +164,11 @@ public class Rama_ctrl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        //if (col.tag == "Collectible")
-        //{
-        //    audioSource.clip = audioClips[0];
-        //    audioSource.Play();
-        //}
+        if (col.tag == "Enemy")
+        {
+            health.playerTakeDamage(1);
+            Debug.Log("Player hit and damage applied.");
+        }
 
         if (col.tag == "MGround")
         {
@@ -232,13 +232,13 @@ public class Rama_ctrl : MonoBehaviour
             isWallJumping = true;
             rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
             wallJumpingCounter = 0f;
+            SoundsManager.instance.PlaySound(jumpSound);
 
             if (transform.localScale.x != wallJumpingDirection)
             {
                 isFacingRight = !isFacingRight;
                 Vector3 localscale = transform.localScale;
                 localscale.x *= -1f;
-                //BG.localScale = new Vector3(2, 2, 2);
                 transform.localScale = localscale;
             }
 
@@ -279,6 +279,7 @@ public class Rama_ctrl : MonoBehaviour
             {
                 attackStep = 0;
             }
+            SoundsManager.instance.PlaySound(slashSound);
 
             SequenceAttack();
             timeSinceLastAttack = 0f;

@@ -7,10 +7,13 @@ using UnityEngine.UI;
 public class MainMenuUI : MonoBehaviour
 {
     public Button start_btn, setting_btn, exit_btn;
+    [SerializeField] AudioClip buttonSound;
 
     private void OnEnable()
     {
         start_btn.onClick.AddListener(StartGame);
+        setting_btn.onClick.AddListener(Settings);
+        exit_btn.onClick.AddListener(ExitProgram);
 
     }
 
@@ -19,20 +22,36 @@ public class MainMenuUI : MonoBehaviour
         start_btn.onClick.RemoveAllListeners();
     }
 
-    void StartGame()
-    {
-        SceneManager.LoadScene("Level 1");
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void StartGame()
     {
-        
+        SoundsManager.instance.PlaySound(buttonSound);
+        SceneManager.LoadScene("SampleScene");
+    }
+
+    void Settings()
+    {
+        SoundsManager.instance.PlaySound(buttonSound);
+        Debug.Log("Setting button pressed");
+    }
+
+    void ExitProgram()
+    {
+        SoundsManager.instance.PlaySound(buttonSound);
+        // Exit to main menu or close the application
+        Debug.Log("Exit button clicked");
+
+        #if UNITY_EDITOR
+        // If running in the Unity Editor, log a message
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        // If running in a build, quit the application
+        Application.Quit();
+        #endif
     }
 }
