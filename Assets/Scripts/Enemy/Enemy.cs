@@ -23,11 +23,15 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] LayerMask playerLayer;
 
+    EnemyPatrol enemyPatrol;
+    bool isAttacking = false;
+
     private void Start()
     {
         currenthp = maxhp;
         animator = GetComponent<Animator>();
         health = playerhp.GetComponent<Health>();
+        enemyPatrol = GetComponentInParent<EnemyPatrol>();
     }
 
     void Update()
@@ -40,8 +44,11 @@ public class Enemy : MonoBehaviour
             {
                 cooldownTimer = 0;
                 animator.SetTrigger("attack");
+                isAttacking = true;
             }
         }
+        PatrolController();
+        
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -97,5 +104,22 @@ public class Enemy : MonoBehaviour
         {
             health.playerTakeDamage(damage);
         }
+    }
+
+    void PatrolController()
+    {
+        if (isAttacking == true)
+        {
+            enemyPatrol.enabled = false;
+        }
+        else
+        {
+            enemyPatrol.enabled = true;
+        }
+    }
+
+    void DisableAttack()
+    {
+        isAttacking = false;
     }
 }

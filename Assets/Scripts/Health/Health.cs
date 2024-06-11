@@ -11,7 +11,8 @@ public class Health : MonoBehaviour
     [Header("iFrames")]
     [SerializeField] float invulDur;
     [SerializeField] int numberOfFlashes;
-    SpriteRenderer spriteRend;
+    SpriteRenderer aria_sprite;
+    SpriteRenderer rama_sprite;
 
     [Header ("Player object")]
     [SerializeField] GameObject aria_obj;
@@ -28,9 +29,12 @@ public class Health : MonoBehaviour
         currentPlayerHp = maxHealth;
         aria_Ctrl = aria_obj.GetComponent<Aria_ctrl>();
         aria_anim = aria_obj.GetComponent<Animator>();
+        aria_sprite = aria_obj.GetComponent<SpriteRenderer>();
+
 
         rama_Ctrl = rama_obj.GetComponent<Rama_ctrl>();
         rama_anim = rama_obj.GetComponent<Animator>();
+        rama_sprite = rama_obj.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -47,6 +51,7 @@ public class Health : MonoBehaviour
         {
             aria_anim.SetTrigger("Hurt");
             rama_anim.SetTrigger("Hurt");
+            StartCoroutine(Invul());
         }
         else
         {
@@ -58,5 +63,21 @@ public class Health : MonoBehaviour
     public void addhp(float _value)
     {
         currentPlayerHp = Mathf.Clamp(currentPlayerHp + _value, 0, maxHealth);
+    }
+
+    IEnumerator Invul()
+    {
+        Physics2D.IgnoreLayerCollision(10, 11, true);
+        //invul dura
+        for (int i = 0; i < numberOfFlashes; i++)
+        {
+            aria_sprite.color = new Color(1, 0, 0, 0.5f);
+            rama_sprite.color = new Color(1, 0, 0, 0.5f);
+            yield return new WaitForSeconds(invulDur / (numberOfFlashes * 2));
+            aria_sprite.color = Color.white;
+            rama_sprite.color = Color.white;
+            yield return new WaitForSeconds(invulDur / (numberOfFlashes * 2));
+        }
+        Physics2D.IgnoreLayerCollision(10, 11, true);
     }
 }
