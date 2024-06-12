@@ -31,7 +31,7 @@ public class MainMenuUI : MonoBehaviour
     void StartGame()
     {
         SoundsManager.instance.PlaySound(buttonSound);
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Level_1");
     }
 
     void Settings()
