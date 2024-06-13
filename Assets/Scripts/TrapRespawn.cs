@@ -22,7 +22,7 @@ public class TrapRespawn : MonoBehaviour
     {
         if (col.tag == "Player")
         {
-            SceneManager.LoadScene("Level 1");
+            SceneManager.LoadScene("Level_1");
         }
     }
 }

@@ -4,27 +4,35 @@ using UnityEngine;
 
 public class Player_respawn : MonoBehaviour
 {
-    [SerializeField] AudioClip activeSound;
-    Transform currentCheckpoint;
+    public Transform currentCheckpoint;
     Health health;
-    float maxhp;
+
+    [Header("Player object")]
+    [SerializeField] GameObject aria_obj;
+    Transform aria_tr;
+
+    [SerializeField] GameObject rama_obj;
+    Transform rama_tr;
 
     // Start is called before the first frame update
     void Start()
     {
         health = GetComponent<Health>();
-        maxhp = health.maxHealth;
+
+        aria_tr = aria_obj.GetComponent<Transform>();
+        rama_tr = rama_obj.GetComponent<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    void Respawn()
+    public void Respawn()
     {
-        transform.position = currentCheckpoint.position;
-        health.currentPlayerHp = maxhp;
+        aria_tr.position = currentCheckpoint.position;
+        rama_tr.position = currentCheckpoint.position;
+        health.Respawn();
     }
 }

@@ -166,7 +166,7 @@ public class Rama_ctrl : MonoBehaviour
     {
         if (col.tag == "Enemy")
         {
-            health.playerTakeDamage(1);
+            health.playerTakeDamage(0);
             Debug.Log("Player hit and damage applied.");
         }
 

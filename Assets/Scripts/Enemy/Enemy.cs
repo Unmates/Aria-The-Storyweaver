@@ -46,7 +46,6 @@ public class Enemy : MonoBehaviour
             if (cooldownTimer >= attackRate)
             {
                 cooldownTimer = 0;
-                SoundsManager.instance.PlaySound(attackSound);
                 animator.SetTrigger("attack");
                 isAttacking = true;
             }
@@ -87,12 +86,6 @@ public class Enemy : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance, 
             new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z), 0 , Vector2.left, 0, playerLayer);
-
-        //if (hit.collider != null)
-        //{
-            
-        //}
-
         return hit.collider != null;
     }
 
@@ -105,6 +98,7 @@ public class Enemy : MonoBehaviour
 
     void DamagePlayer()
     {
+        SoundsManager.instance.PlaySound(attackSound);
         if (playerClose())
         {
             health.playerTakeDamage(damage);
