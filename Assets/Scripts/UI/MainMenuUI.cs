@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour
 {
+    [Header("UI")]
+    SettingMenu settingMenu;
+    [SerializeField] GameObject settingUI;
+    [SerializeField] GameObject blackBg;
     public Button start_btn, setting_btn, exit_btn;
     [SerializeField] AudioClip buttonSound;
 
@@ -14,7 +18,6 @@ public class MainMenuUI : MonoBehaviour
         start_btn.onClick.AddListener(StartGame);
         setting_btn.onClick.AddListener(Settings);
         exit_btn.onClick.AddListener(ExitProgram);
-
     }
 
     private void OnDisable()
@@ -22,10 +25,15 @@ public class MainMenuUI : MonoBehaviour
         start_btn.onClick.RemoveAllListeners();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        settingMenu = GetComponent<SettingMenu>();
+        blackBg.SetActive(false);
+    }
+
+    private void Update()
+    {
+        BlackBGActive();
     }
 
     void StartGame()
@@ -36,6 +44,8 @@ public class MainMenuUI : MonoBehaviour
 
     void Settings()
     {
+        settingMenu.OpenSettings();
+        blackBg.SetActive(true);
         SoundsManager.instance.PlaySound(buttonSound);
         Debug.Log("Setting button pressed");
     }
@@ -53,5 +63,17 @@ public class MainMenuUI : MonoBehaviour
         // If running in a build, quit the application
         Application.Quit();
         #endif
+    }
+
+    void BlackBGActive()
+    {
+        if (settingUI.activeSelf == true)
+        {
+            blackBg.SetActive(true);
+        }
+        else
+        {
+            blackBg.SetActive(false);
+        }
     }
 }

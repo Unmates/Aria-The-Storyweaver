@@ -19,6 +19,8 @@ public class Health : MonoBehaviour
     SpriteRenderer rama_sprite;
 
     [Header ("Player object")]
+    Switch switchClass;
+
     [SerializeField] GameObject aria_obj;
     Animator aria_anim;
     Aria_ctrl aria_Ctrl;
@@ -33,9 +35,14 @@ public class Health : MonoBehaviour
     [SerializeField] AudioClip hurtSound;
     [SerializeField] AudioClip deadSound;
 
+    [Header("UI")]
+    [SerializeField] GameObject inGameUI;
+    PauseMenu pauseMenu;
+
     // Start is called before the first frame update
     void Awake()
     {
+        switchClass = GetComponent<Switch>();
         currentPlayerHp = maxHealth;
         player_Respawn = GetComponent<Player_respawn>();
         aria_Ctrl = aria_obj.GetComponent<Aria_ctrl>();
@@ -47,6 +54,8 @@ public class Health : MonoBehaviour
         rama_anim = rama_obj.GetComponent<Animator>();
         rama_sprite = rama_obj.GetComponent<SpriteRenderer>();
         rama_tr = rama_obj.GetComponent<Transform>();
+
+        pauseMenu = inGameUI.GetComponent<PauseMenu>();
     }
 
     // Update is called once per frame
@@ -58,26 +67,35 @@ public class Health : MonoBehaviour
     public void playerTakeDamage(float _damage)
     { 
         currentPlayerHp = Mathf.Clamp(currentPlayerHp - _damage, 0, maxHealth);
+        int currenChar = switchClass.currentCharacterIndex;
 
         if (currentPlayerHp > 0)
         {
             SoundsManager.instance.PlaySound(hurtSound);
-            aria_anim.SetTrigger("Hurt");
-            rama_anim.SetTrigger("Hurt");
+            if (currenChar == 0)
+            {
+                aria_anim.SetTrigger("Hurt");
+            }
+            else
+            {
+                rama_anim.SetTrigger("Hurt");
+            }
             StartCoroutine(Invul());
         }
         else
         {
             SoundsManager.instance.PlaySound(deadSound);
-            try
+            if (currenChar == 0)
             {
-                rama_Ctrl.dead();
-            }
-            catch (System.Exception)
-            {
+                aria_anim.SetTrigger("Hurt");
                 aria_Ctrl.dead();
             }
-            Respawn();
+            else
+            {
+                rama_anim.SetTrigger("Hurt");
+                rama_Ctrl.dead();
+            }
+            StartCoroutine(gameOverDelay());
         }
     }
 
@@ -109,5 +127,11 @@ public class Health : MonoBehaviour
             yield return new WaitForSeconds(invulDur / (numberOfFlashes * 2));
         }
         Physics2D.IgnoreLayerCollision(8, 7, false);
+    }
+
+    IEnumerator gameOverDelay()
+    {
+        yield return new WaitForSeconds(1);
+        pauseMenu.GameOverScreen();
     }
 }
