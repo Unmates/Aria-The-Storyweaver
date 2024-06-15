@@ -30,7 +30,6 @@ public class Checkpoint : MonoBehaviour
             SoundsManager.instance.PlaySound(activeSound);
             animator.SetBool("Active", true);
             player_Respawn.currentCheckpoint = transform;
-
         }
     }
 }

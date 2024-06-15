@@ -5,23 +5,23 @@ using TMPro;
 
 public class Dialog : MonoBehaviour
 {
+    [SerializeField] GameObject blackBg;
     public TextMeshProUGUI textComponent;
     public string[] lines;
-    public float textspeed;
+    public float textSpeed;
 
-    int index;
+    private int index;
 
     // Start is called before the first frame update
     void Start()
     {
         textComponent.text = string.Empty;
-        StartDialog();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.J))
         {
             if (textComponent.text == lines[index])
             {
@@ -35,8 +35,11 @@ public class Dialog : MonoBehaviour
         }
     }
 
-    void StartDialog()
+    public void StartDialog()
     {
+        gameObject.SetActive(true);
+        blackBg.SetActive(true);
+        Time.timeScale = 0f;
         index = 0;
         StartCoroutine(TypeLine());
     }
@@ -46,7 +49,7 @@ public class Dialog : MonoBehaviour
         foreach (char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
-            yield return new WaitForSeconds(textspeed);
+            yield return new WaitForSecondsRealtime(textSpeed);
         }
     }
 
@@ -60,7 +63,14 @@ public class Dialog : MonoBehaviour
         }
         else
         {
-            gameObject.SetActive(false);
+            EndDialog();
         }
+    }
+
+    void EndDialog()
+    {
+        Time.timeScale = 1f;
+        gameObject.SetActive(false);
+        blackBg.SetActive(false);
     }
 }
