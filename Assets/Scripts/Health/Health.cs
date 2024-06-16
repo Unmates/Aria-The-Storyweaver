@@ -61,7 +61,17 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (switchClass.currentCharacterIndex == 1)
+        {
+            if (rama_Ctrl.isDashing)
+            {
+                return;
+            }
+            if (Input.GetKeyDown(KeyCode.LeftShift) && rama_Ctrl.canDash)
+            {
+                StartCoroutine(rama_Ctrl.Dash());
+            }
+        }
     }
 
     public void playerTakeDamage(float _damage)

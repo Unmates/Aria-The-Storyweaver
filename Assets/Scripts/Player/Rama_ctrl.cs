@@ -18,7 +18,9 @@ public class Rama_ctrl : MonoBehaviour
     [SerializeField] float dashingPower = 24f;
     float dashingTime = 0.2f;
     float dashingCooldown = 1f;
-    [SerializeField] float atkdmg = 50f;
+    [SerializeField] float atkdmg = 75f;
+    [SerializeField] float attackCooldown = 0.3f;
+    float lastAttackTime;
 
     [SerializeField] Vector2 groundchecksize;
     [SerializeField] Vector2 wallchecksize;
@@ -33,8 +35,8 @@ public class Rama_ctrl : MonoBehaviour
     [SerializeField] bool falling;
     bool isFacingRight = true;
     bool isWallJumping;
-    bool canDash = true;
-    bool isDashing;
+    public bool canDash = true;
+    public bool isDashing;
 
     [SerializeField] GameObject healthobj;
 
@@ -61,6 +63,7 @@ public class Rama_ctrl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         health = healthobj.GetComponent<Health>();
+        lastAttackTime = -attackCooldown;
     }
 
     void Update()
@@ -78,10 +81,10 @@ public class Rama_ctrl : MonoBehaviour
         wallJump();
         Attack();
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
-        {
-            StartCoroutine(Dash());
-        }
+        //if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        //{
+        //    StartCoroutine(Dash());
+        //}
 
         if (!isWallJumping)
         {
@@ -251,7 +254,7 @@ public class Rama_ctrl : MonoBehaviour
         isWallJumping = false;
     }
 
-    private IEnumerator Dash()
+    public IEnumerator Dash()
     {
         canDash = false;
         isDashing = true;
@@ -275,14 +278,18 @@ public class Rama_ctrl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            if (timeSinceLastAttack >= attackResetTime)
+            if (Time.time >= lastAttackTime + attackCooldown)
             {
-                attackStep = 0;
-            }
-            SoundsManager.instance.PlaySound(slashSound);
+                if (timeSinceLastAttack >= attackResetTime)
+                {
+                    attackStep = 0;
+                }
+                SoundsManager.instance.PlaySound(slashSound);
 
-            SequenceAttack();
-            timeSinceLastAttack = 0f;
+                SequenceAttack();
+                timeSinceLastAttack = 0f;
+                lastAttackTime = Time.time;
+            }
         }
     }
 
@@ -298,12 +305,14 @@ public class Rama_ctrl : MonoBehaviour
         {
             animator.SetTrigger("Attack2");
             PerformAttack();
+            MoveForward();
             attackStep++;
         }
         else if (attackStep == 2 && onGround)
         {
             animator.SetTrigger("Attack3");
             PerformAttack();
+            MoveForward();
             attackStep = 0;
         }
         else if (!onGround)
@@ -319,6 +328,20 @@ public class Rama_ctrl : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<Enemy>().takedamage(atkdmg);
+        }
+    }
+
+    void MoveForward()
+    {
+        float moveAmount = 1f; // Adjust this value for how far forward you want the player to move
+
+        if (isFacingRight)
+        {
+            transform.position += new Vector3(moveAmount, 0, 0);
+        }
+        else
+        {
+            transform.position -= new Vector3(moveAmount, 0, 0);
         }
     }
 

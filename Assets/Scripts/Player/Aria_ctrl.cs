@@ -11,6 +11,8 @@ public class Aria_ctrl : MonoBehaviour
     [SerializeField] float jumpPower = 3f;
     [SerializeField] float airjumpCount = 1f;
     [SerializeField] float maxairjump = 1f;
+    [SerializeField] float attackCooldown = 0.5f;
+    float lastAttackTime;
 
     [SerializeField] Vector2 groundchecksize;
 
@@ -43,6 +45,7 @@ public class Aria_ctrl : MonoBehaviour
         animator = GetComponent<Animator>();
         health = healthobj.GetComponent<Health>();
         SpawnFireball();
+        lastAttackTime = -attackCooldown;
     }
 
     void Update()
@@ -164,11 +167,16 @@ public class Aria_ctrl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.J))
         {
-            SoundsManager.instance.PlaySound(fireballsSound);
-            animator.SetTrigger("Attack");
+            if (Time.time >= lastAttackTime + attackCooldown)
+            {
+                SoundsManager.instance.PlaySound(fireballsSound);
+                animator.SetTrigger("Attack");
 
-            fireballs[findFireball()].transform.position = firePoint.position;
-            fireballs[findFireball()].GetComponent<Aria_shot>().setDirection(Mathf.Sign(transform.localScale.x));
+                fireballs[findFireball()].transform.position = firePoint.position;
+                fireballs[findFireball()].GetComponent<Aria_shot>().setDirection(Mathf.Sign(transform.localScale.x));
+
+                lastAttackTime = Time.time;
+            }
         }
     }
 

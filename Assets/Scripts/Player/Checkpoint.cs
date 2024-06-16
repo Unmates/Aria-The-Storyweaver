@@ -8,6 +8,7 @@ public class Checkpoint : MonoBehaviour
     Health player_Respawn;
     Animator animator;
     [SerializeField] AudioClip activeSound;
+    bool alive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,11 +25,16 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Player"))
+        if (!alive)
         {
-            SoundsManager.instance.PlaySound(activeSound);
-            animator.SetBool("Active", true);
-            player_Respawn.currentCheckpoint = transform;
+            if (col.CompareTag("Player"))
+            {
+                alive = true;
+                SoundsManager.instance.PlaySound(activeSound);
+                animator.SetBool("Active", true);
+                player_Respawn.currentCheckpoint = transform;
+            }
         }
+        
     }
 }

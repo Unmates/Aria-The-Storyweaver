@@ -231,6 +231,7 @@ MonoBehaviour:
   jumpPower: 10
   airjumpCount: 1
   maxairjump: 1
+  attackCooldown: 0.5
   groundchecksize: {x: 0.6, y: 0.2}
   onGround: 0
   falling: 0
