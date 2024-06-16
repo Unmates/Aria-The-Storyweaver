@@ -7,7 +7,6 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] GameObject respawnObj;
     Health player_Respawn;
     Animator animator;
-    Transform currentCheck;
     [SerializeField] AudioClip activeSound;
 
     // Start is called before the first frame update
