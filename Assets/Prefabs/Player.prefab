@@ -110,7 +110,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -599343337, guid: 9c281f0c5981de54da2b76b500a4318a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -449,8 +449,8 @@ MonoBehaviour:
   maxHealth: 5
   currentPlayerHp: 0
   currentCheckpoint: {fileID: 0}
-  invulDur: 10
-  numberOfFlashes: 8
+  invulDur: 2
+  numberOfFlashes: 3
   aria_obj: {fileID: 1268058463448395002}
   rama_obj: {fileID: 8713855185390797576}
   hurtSound: {fileID: 8300000, guid: 59abbeedb1c1e534a8374938533a2855, type: 3}
@@ -567,7 +567,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 900904038, guid: ec650a854cc7af047ac42464f14ca6af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -670,12 +670,15 @@ MonoBehaviour:
   wallJumpingDuration: 0.4
   dashingPower: 24
   atkdmg: 50
+  attackCooldown: 0.2
   groundchecksize: {x: 0.8, y: 0.2}
   wallchecksize: {x: 0.3, y: 1.5}
   atksize: {x: 2, y: 0.7}
   onGround: 0
   onWall: 0
   falling: 0
+  canDash: 1
+  isDashing: 0
   healthobj: {fileID: 6698046572027372588}
   groundCheck: {fileID: 2470604039900692719}
   wallCheck: {fileID: 4309037875176686320}

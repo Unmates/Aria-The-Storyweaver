@@ -19,7 +19,7 @@ public class Rama_ctrl : MonoBehaviour
     float dashingTime = 0.2f;
     float dashingCooldown = 1f;
     [SerializeField] float atkdmg = 75f;
-    [SerializeField] float attackCooldown = 0.3f;
+    [SerializeField] float attackCooldown = 0.2f;
     float lastAttackTime;
 
     [SerializeField] Vector2 groundchecksize;
@@ -164,7 +164,7 @@ public class Rama_ctrl : MonoBehaviour
     {
         if (col.tag == "Enemy")
         {
-            health.playerTakeDamage(0);
+            health.playerTakeDamage(1);
             Debug.Log("Player hit and damage applied.");
         }
 

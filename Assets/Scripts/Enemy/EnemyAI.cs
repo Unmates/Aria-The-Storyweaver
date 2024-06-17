@@ -5,8 +5,13 @@ using Pathfinding;
 
 public class EnemyAI : MonoBehaviour
 {
+    [SerializeField] GameObject playerObj;
+    [SerializeField] GameObject ramaObj;
+    [SerializeField] GameObject ariaObj;
+    Switch switchClass;
 
-    public Transform target;
+    Transform ramaTr;
+    Transform ariaTr;
 
     public float speed = 200f;
     public float nextWaypointDistance = 3f;
@@ -22,6 +27,9 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        switchClass = playerObj.GetComponent<Switch>();
+        ariaTr = ariaObj.GetComponent<Transform>();
+        ramaTr = ramaObj.GetComponent<Transform>();
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -30,9 +38,19 @@ public class EnemyAI : MonoBehaviour
 
     void UpdatePath()
     {
-        if (seeker.IsDone())
+        if (switchClass.currentCharacterIndex == 0)
         {
-            seeker.StartPath(rb.position, target.position, OnPathComplete);
+            if (seeker.IsDone())
+            {
+                seeker.StartPath(rb.position, ariaTr.position, OnPathComplete);
+            }
+        }
+        else
+        {
+            if (seeker.IsDone())
+            {
+                seeker.StartPath(rb.position, ramaTr.position, OnPathComplete);
+            }
         }
     }
 
@@ -71,23 +89,23 @@ public class EnemyAI : MonoBehaviour
         {
             currentWaypoint++;
         }
-        facing();
+        //facing();
     }
 
-    void facing()
-    {
-        if (rb.velocity.x >= 0.01f && isRight == false)
-        {
-            isRight = true;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1;
-            transform.localScale = localScale;
-        } else if (rb.velocity.x <= -0.01f && isRight == true)
-        {
-            isRight = false;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1;
-            transform.localScale = localScale;
-        }
-    }
+    //void facing()
+    //{
+    //    if (rb.velocity.x >= 0.01f && isRight == false)
+    //    {
+    //        isRight = true;
+    //        Vector3 localScale = transform.localScale;
+    //        localScale.x *= -1;
+    //        transform.localScale = localScale;
+    //    } else if (rb.velocity.x <= -0.01f && isRight == true)
+    //    {
+    //        isRight = false;
+    //        Vector3 localScale = transform.localScale;
+    //        localScale.x *= -1;
+    //        transform.localScale = localScale;
+    //    }
+    //}
 }

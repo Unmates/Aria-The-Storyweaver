@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Status")]
     [SerializeField] float maxhp = 100f;
     [SerializeField] float damage;
     float currenthp;
@@ -18,12 +19,15 @@ public class Enemy : MonoBehaviour
 
     public Animator animator;
 
+    [Header("Player detect")]
     [SerializeField] GameObject playerhp;
     Health health;
 
     [SerializeField] LayerMask playerLayer;
 
     EnemyPatrol enemyPatrol;
+    EnemyAI enemyAI;
+    LineOfSight lineOfSight;
     bool isAttacking = false;
 
     [Header("Sound")]
@@ -35,6 +39,8 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         health = playerhp.GetComponent<Health>();
         enemyPatrol = GetComponentInParent<EnemyPatrol>();
+        enemyAI = GetComponentInParent<EnemyAI>();
+        lineOfSight = GetComponentInParent<LineOfSight>();
     }
 
     void Update()
@@ -109,11 +115,15 @@ public class Enemy : MonoBehaviour
     {
         if (isAttacking == true)
         {
+            animator.SetBool("moving", false);
             enemyPatrol.enabled = false;
+            lineOfSight.onSight = false;
         }
         else
         {
+            animator.SetBool("moving", true);
             enemyPatrol.enabled = true;
+            lineOfSight.onSight = true;
         }
     }
 

@@ -137,7 +137,7 @@ public class Aria_ctrl : MonoBehaviour
     {
         if (col.tag == "Enemy")
         {
-            health.playerTakeDamage(0);
+            health.playerTakeDamage(1);
             Debug.Log("Player hit and damage applied.");
         }
 

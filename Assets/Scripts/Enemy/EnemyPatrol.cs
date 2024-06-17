@@ -9,8 +9,11 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField] Transform enemy;
     [SerializeField] float speed;
     Vector3 initscale;
+    Vector3 spriteScale;
     [SerializeField] bool movingLeft;
-    [SerializeField] Animator animator;
+    [SerializeField] GameObject spriteObj;
+    Transform spriteTr;
+    Animator animator;
     [SerializeField] float idleDuration;
     float idleTimer;
 
@@ -18,12 +21,9 @@ public class EnemyPatrol : MonoBehaviour
     void Awake()
     {
         initscale = enemy.localScale;
-        animator = enemy.GetComponent<Animator>();
-    }
-
-    private void OnDisable()
-    {
-        animator.SetBool("moving", false);
+        animator = spriteObj.GetComponent<Animator>();
+        spriteTr = spriteObj.gameObject.GetComponent<Transform>();
+        spriteScale = spriteTr.localScale;
     }
 
     // Update is called once per frame
@@ -68,7 +68,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         idleTimer = 0;
         animator.SetBool("moving", true);
-        enemy.localScale = new Vector3(Mathf.Abs(initscale.x) * _direction, initscale.y, initscale.z);
+        spriteTr.localScale = new Vector3(Mathf.Abs(spriteScale.x) * _direction, spriteScale.y, spriteScale.z);
 
         enemy.position = new Vector3(enemy.position.x + Time.deltaTime * _direction * speed, enemy.position.y, enemy.position.z);
     }

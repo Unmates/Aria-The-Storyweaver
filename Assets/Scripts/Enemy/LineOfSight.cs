@@ -8,13 +8,20 @@ public class LineOfSight : MonoBehaviour
     [SerializeField] Vector2 LOSchecksize;
     [SerializeField] Transform LOSCheck;
     [SerializeField] LayerMask LOSLayer;
-    [SerializeField] bool onSight;
+    public bool onSight;
+
+    [SerializeField] GameObject spriteObj;
+    Animator anim;
+    [SerializeField] GameObject patrolObj;
+    EnemyPatrol enemyPatrol;
 
     EnemyAI enemyAI;
 
     // Start is called before the first frame update
     void Start()
     {
+        anim = spriteObj.GetComponent<Animator>();
+        enemyPatrol = patrolObj.GetComponent<EnemyPatrol>();
         enemyAI = GetComponent<EnemyAI>();
     }
 
@@ -24,10 +31,12 @@ public class LineOfSight : MonoBehaviour
         saw();
         if (onSight)
         {
+            enemyPatrol.enabled = false;
             enemyAI.enabled = true;
         }
         else
         {
+            enemyPatrol.enabled = true;
             enemyAI.enabled = false;
         }
     }
