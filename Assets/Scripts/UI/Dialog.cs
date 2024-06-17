@@ -1,13 +1,25 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class Dialog : MonoBehaviour
 {
+    [System.Serializable]
+    public struct DialogLine
+    {
+        public string text;
+        public Sprite characterName;
+        public Sprite characterImage;
+    }
+
     [SerializeField] GameObject blackBg;
     public TextMeshProUGUI textComponent;
-    public string[] lines;
+    public Image nameComponent; // Add this in the inspector
+    public Image characterImageComponent; // Add this in the inspector
+
+
+    public DialogLine[] lines;
     public float textSpeed;
 
     private int index;
@@ -23,14 +35,14 @@ public class Dialog : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.J))
         {
-            if (textComponent.text == lines[index])
+            if (textComponent.text == lines[index].text)
             {
                 NextLine();
             }
             else
             {
                 StopAllCoroutines();
-                textComponent.text = lines[index];
+                textComponent.text = lines[index].text;
             }
         }
     }
@@ -46,7 +58,14 @@ public class Dialog : MonoBehaviour
 
     IEnumerator TypeLine()
     {
-        foreach (char c in lines[index].ToCharArray())
+        DialogLine currentLine = lines[index];
+        textComponent.text = string.Empty;
+        nameComponent.sprite = currentLine.characterName;
+        characterImageComponent.sprite = currentLine.characterImage;
+
+        AdjustImageSize(currentLine.characterImage);
+
+        foreach (char c in currentLine.text.ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSecondsRealtime(textSpeed);
@@ -72,5 +91,20 @@ public class Dialog : MonoBehaviour
         Time.timeScale = 1f;
         gameObject.SetActive(false);
         blackBg.SetActive(false);
+    }
+
+    void AdjustImageSize(Sprite sprite)
+    {
+        if (sprite != null)
+        {
+            // Get the original size of the sprite
+            Vector2 spriteSize = sprite.bounds.size;
+
+            // Get the RectTransform of the character image UI element
+            RectTransform rectTransform = characterImageComponent.GetComponent<RectTransform>();
+
+            // Adjust the size of the RectTransform to match the sprite size
+            rectTransform.sizeDelta = new Vector2(spriteSize.x * 100f, spriteSize.y * 100f);
+        }
     }
 }

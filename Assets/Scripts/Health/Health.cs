@@ -15,6 +15,7 @@ public class Health : MonoBehaviour
     [Header("iFrames")]
     [SerializeField] float invulDur;
     [SerializeField] int numberOfFlashes;
+    bool isInvul = false;
     SpriteRenderer aria_sprite;
     SpriteRenderer rama_sprite;
 
@@ -61,41 +62,54 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (switchClass.currentCharacterIndex == 1)
+        {
+            if (rama_Ctrl.isDashing)
+            {
+                return;
+            }
+            if (Input.GetKeyDown(KeyCode.LeftShift) && rama_Ctrl.canDash)
+            {
+                StartCoroutine(rama_Ctrl.Dash());
+            }
+        }
     }
 
     public void playerTakeDamage(float _damage)
     { 
-        currentPlayerHp = Mathf.Clamp(currentPlayerHp - _damage, 0, maxHealth);
-        int currenChar = switchClass.currentCharacterIndex;
+        if (isInvul)
+        {
+            currentPlayerHp = Mathf.Clamp(currentPlayerHp - _damage, 0, maxHealth);
+            int currenChar = switchClass.currentCharacterIndex;
 
-        if (currentPlayerHp > 0)
-        {
-            SoundsManager.instance.PlaySound(hurtSound);
-            if (currenChar == 0)
+            if (currentPlayerHp > 0)
             {
-                aria_anim.SetTrigger("Hurt");
+                SoundsManager.instance.PlaySound(hurtSound);
+                if (currenChar == 0)
+                {
+                    aria_anim.SetTrigger("Hurt");
+                }
+                else
+                {
+                    rama_anim.SetTrigger("Hurt");
+                }
+                StartCoroutine(Invul());
             }
             else
             {
-                rama_anim.SetTrigger("Hurt");
+                SoundsManager.instance.PlaySound(deadSound);
+                if (currenChar == 0)
+                {
+                    aria_anim.SetTrigger("Hurt");
+                    aria_Ctrl.dead();
+                }
+                else
+                {
+                    rama_anim.SetTrigger("Hurt");
+                    rama_Ctrl.dead();
+                }
+                StartCoroutine(gameOverDelay());
             }
-            StartCoroutine(Invul());
-        }
-        else
-        {
-            SoundsManager.instance.PlaySound(deadSound);
-            if (currenChar == 0)
-            {
-                aria_anim.SetTrigger("Hurt");
-                aria_Ctrl.dead();
-            }
-            else
-            {
-                rama_anim.SetTrigger("Hurt");
-                rama_Ctrl.dead();
-            }
-            StartCoroutine(gameOverDelay());
         }
     }
 
@@ -115,7 +129,7 @@ public class Health : MonoBehaviour
 
     IEnumerator Invul()
     {
-        Physics2D.IgnoreLayerCollision(8, 7, true);
+        isInvul = true;
         //invul dura
         for (int i = 0; i < numberOfFlashes; i++)
         {
@@ -126,7 +140,7 @@ public class Health : MonoBehaviour
             rama_sprite.color = Color.white;
             yield return new WaitForSeconds(invulDur / (numberOfFlashes * 2));
         }
-        Physics2D.IgnoreLayerCollision(8, 7, false);
+        isInvul = false;
     }
 
     IEnumerator gameOverDelay()

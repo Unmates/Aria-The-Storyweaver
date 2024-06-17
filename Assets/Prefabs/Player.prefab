@@ -231,6 +231,7 @@ MonoBehaviour:
   jumpPower: 10
   airjumpCount: 1
   maxairjump: 1
+  attackCooldown: 0.5
   groundchecksize: {x: 0.6, y: 0.2}
   onGround: 0
   falling: 0
@@ -445,15 +446,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3a894a8c6120d4387ddb9ad21da2e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 5
   currentPlayerHp: 0
   currentCheckpoint: {fileID: 0}
-  invulDur: 0
-  numberOfFlashes: 0
+  invulDur: 10
+  numberOfFlashes: 8
   aria_obj: {fileID: 1268058463448395002}
   rama_obj: {fileID: 8713855185390797576}
-  hurtSound: {fileID: 0}
-  deadSound: {fileID: 0}
+  hurtSound: {fileID: 8300000, guid: 59abbeedb1c1e534a8374938533a2855, type: 3}
+  deadSound: {fileID: 8300000, guid: 634c50769e2db834e92b0209e7d72476, type: 3}
   inGameUI: {fileID: 0}
 --- !u!1 &8521485465448843383
 GameObject:
@@ -675,7 +676,7 @@ MonoBehaviour:
   onGround: 0
   onWall: 0
   falling: 0
-  healthobj: {fileID: 0}
+  healthobj: {fileID: 6698046572027372588}
   groundCheck: {fileID: 2470604039900692719}
   wallCheck: {fileID: 4309037875176686320}
   atkHitbox: {fileID: 7679685648237666679}
