@@ -5867,10 +5867,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blackBg: {fileID: 2130529285}
   textComponent: {fileID: 1898493294}
+  nameComponent: {fileID: 0}
+  characterImageComponent: {fileID: 0}
   lines:
-  - lorem
-  - ipsum
-  - dolor
+  - text: 
+    characterName: {fileID: 0}
+    characterImage: {fileID: 0}
+  - text: 
+    characterName: {fileID: 0}
+    characterImage: {fileID: 0}
+  - text: 
+    characterName: {fileID: 0}
+    characterImage: {fileID: 0}
   textSpeed: 0.1
 --- !u!114 &1334796958
 MonoBehaviour:

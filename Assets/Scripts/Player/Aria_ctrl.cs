@@ -204,7 +204,5 @@ public class Aria_ctrl : MonoBehaviour
     {
         animator.SetBool("Dead", true);
         Debug.Log("Player dead");
-        //GetComponent<Collider2D>().enabled = false;
-        //this.enabled = false;
     }
 }

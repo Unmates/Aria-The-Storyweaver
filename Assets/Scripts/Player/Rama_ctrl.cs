@@ -52,7 +52,7 @@ public class Rama_ctrl : MonoBehaviour
 
     int attackStep = 0;
     float timeSinceLastAttack = 0f;
-    [SerializeField] float attackResetTime = 1f; // Time to reset the attack sequence
+    [SerializeField] float attackResetTime = 1f;
 
     [Header("Audio")]
     [SerializeField] AudioClip slashSound;
@@ -80,11 +80,6 @@ public class Rama_ctrl : MonoBehaviour
         wallSlide();
         wallJump();
         Attack();
-
-        //if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
-        //{
-        //    StartCoroutine(Dash());
-        //}
 
         if (!isWallJumping)
         {
@@ -349,7 +344,5 @@ public class Rama_ctrl : MonoBehaviour
     {
         animator.SetBool("Dead", true);
         Debug.Log("Player dead");
-        //GetComponent<Collider2D>().enabled = false;
-        //this.enabled = false;
     }
 }
