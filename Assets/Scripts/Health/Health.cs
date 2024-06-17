@@ -77,7 +77,7 @@ public class Health : MonoBehaviour
 
     public void playerTakeDamage(float _damage)
     { 
-        if (isInvul)
+        if (!isInvul)
         {
             currentPlayerHp = Mathf.Clamp(currentPlayerHp - _damage, 0, maxHealth);
             int currenChar = switchClass.currentCharacterIndex;
