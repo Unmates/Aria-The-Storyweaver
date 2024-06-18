@@ -85,8 +85,10 @@ public class Enemy : MonoBehaviour
         animator.SetBool("dead", true);
         Debug.Log("Enemy dead");
         GetComponent<Collider2D>().enabled = false;
-        this.enabled = false;
         enemyPatrol.enabled = false;
+        lineOfSight.onSight = false;
+        rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        this.enabled = false;
     }
 
     bool playerClose()
