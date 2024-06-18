@@ -7,6 +7,7 @@ public class HpCollect : MonoBehaviour
     [SerializeField] float hpValue;
     GameObject playerhp;
     Health health;
+    [SerializeField] AudioClip collectSound;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class HpCollect : MonoBehaviour
     {
         if (col.tag == "Player")
         {
+            SoundsManager.instance.PlaySound(collectSound);
             health.addhp(hpValue);
             gameObject.SetActive(false);
         }
