@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float range;
     [SerializeField] float colliderDistance;
     float cooldownTimer = Mathf.Infinity;
+    Rigidbody2D rb;
 
     public Animator animator;
 
@@ -26,7 +27,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] LayerMask playerLayer;
 
     EnemyPatrol enemyPatrol;
-    EnemyAI enemyAI;
+    [SerializeField] GameObject enemyAI;
     LineOfSight lineOfSight;
     bool isAttacking = false;
 
@@ -39,8 +40,8 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         health = playerhp.GetComponent<Health>();
         enemyPatrol = GetComponentInParent<EnemyPatrol>();
-        enemyAI = GetComponentInParent<EnemyAI>();
         lineOfSight = GetComponentInParent<LineOfSight>();
+        rb = enemyAI.GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -118,12 +119,14 @@ public class Enemy : MonoBehaviour
             animator.SetBool("moving", false);
             enemyPatrol.enabled = false;
             lineOfSight.onSight = false;
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         }
         else
         {
             animator.SetBool("moving", true);
             enemyPatrol.enabled = true;
             lineOfSight.onSight = true;
+            rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
         }
     }
 
