@@ -148,4 +148,26 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(1);
         pauseMenu.GameOverScreen();
     }
+
+    public void EnableControll()
+    {
+        aria_Ctrl.enabled = true;
+        rama_Ctrl.enabled = true;
+        switchClass.enabled = true;
+    }
+
+    public void DisableControll()
+    {
+        if (switchClass.currentCharacterIndex == 0)
+        {
+            aria_Ctrl.StopMovement();
+            aria_Ctrl.enabled = false;
+        }
+        else
+        {
+            rama_Ctrl.StopMovement();
+            rama_Ctrl.enabled = false;
+        }
+        switchClass.enabled = false;
+    }
 }

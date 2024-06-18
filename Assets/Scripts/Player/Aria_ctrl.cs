@@ -205,4 +205,11 @@ public class Aria_ctrl : MonoBehaviour
         animator.SetBool("Dead", true);
         Debug.Log("Player dead");
     }
+
+    public void StopMovement()
+    {
+        animator.SetFloat("Moving", 0);
+        rb.velocity = Vector2.zero;
+        hAxis = 0;
+    }
 }
