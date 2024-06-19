@@ -7,11 +7,14 @@ public class Switch : MonoBehaviour
     public Transform[] characters;  // Array to hold references to the characters
     public CameraFollow cameraFollow;  // Reference to the CameraFollow script
     public int currentCharacterIndex = 0;
-
+    public bool canSwitch;
     void Start()
     {
         // Initialize with the first character
-        SwitchToCharacter(0);
+        if (canSwitch)
+        {
+            SwitchToCharacter(0);
+        }
     }
 
     void Update()

@@ -24,6 +24,9 @@ public class Dialog : MonoBehaviour
 
     private int index;
 
+    [SerializeField] GameObject playerObj;
+    Health health;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +36,7 @@ public class Dialog : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.J))
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.F))
         {
             if (textComponent.text == lines[index].text)
             {
@@ -49,9 +52,10 @@ public class Dialog : MonoBehaviour
 
     public void StartDialog()
     {
+        health = playerObj.GetComponent<Health>();
+        health.DisableControll();
         gameObject.SetActive(true);
         blackBg.SetActive(true);
-        Time.timeScale = 0f;
         index = 0;
         StartCoroutine(TypeLine());
     }
@@ -88,7 +92,8 @@ public class Dialog : MonoBehaviour
 
     void EndDialog()
     {
-        Time.timeScale = 1f;
+        health = playerObj.GetComponent<Health>();
+        health.EnableControll();
         gameObject.SetActive(false);
         blackBg.SetActive(false);
     }

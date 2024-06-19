@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     EnemyPatrol enemyPatrol;
     [SerializeField] GameObject enemyAI;
     LineOfSight lineOfSight;
+    EnemyAI enemyAIfunc;
     bool isAttacking = false;
 
     [Header("Sound")]
@@ -39,8 +40,10 @@ public class Enemy : MonoBehaviour
         currenthp = maxhp;
         animator = GetComponent<Animator>();
         health = playerhp.GetComponent<Health>();
+        enemyAIfunc = enemyAI.GetComponent<EnemyAI>();
         enemyPatrol = GetComponentInParent<EnemyPatrol>();
         lineOfSight = GetComponentInParent<LineOfSight>();
+
         rb = enemyAI.GetComponent<Rigidbody2D>();
     }
 
@@ -86,7 +89,8 @@ public class Enemy : MonoBehaviour
         Debug.Log("Enemy dead");
         GetComponent<Collider2D>().enabled = false;
         enemyPatrol.enabled = false;
-        lineOfSight.onSight = false;
+        enemyAIfunc.enabled = false;
+        lineOfSight.enabled = false;
         rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         this.enabled = false;
     }
