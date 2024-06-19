@@ -106,7 +106,7 @@ public class Health : MonoBehaviour
                 else
                 {
                     rama_anim.SetTrigger("Hurt");
-                    rama_Ctrl.dead();
+                    rama_Ctrl.Dead();
                 }
                 StartCoroutine(gameOverDelay());
             }
@@ -124,7 +124,7 @@ public class Health : MonoBehaviour
         rama_tr.position = currentCheckpoint.position;
         currentPlayerHp = maxHealth;
         aria_anim.SetBool("Dead", false);
-        aria_anim.SetBool("Dead", false);
+        rama_anim.SetBool("Dead", false);
     }
 
     IEnumerator Invul()

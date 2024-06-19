@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public delegate void EnemyDeathEventHandler();
+    public event EnemyDeathEventHandler OnEnemyDeath;
+
     [Header("Status")]
     [SerializeField] float maxhp = 100f;
     [SerializeField] float damage;
@@ -93,6 +96,7 @@ public class Enemy : MonoBehaviour
         lineOfSight.enabled = false;
         rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         this.enabled = false;
+        StartCoroutine(InKillZone());
     }
 
     bool playerClose()
@@ -139,5 +143,15 @@ public class Enemy : MonoBehaviour
     void DisableAttack()
     {
         isAttacking = false;
+    }
+
+    IEnumerator InKillZone()
+    {
+        yield return new WaitForSeconds(2);
+        if (OnEnemyDeath != null)
+        {
+            OnEnemyDeath.Invoke();
+        }
+        Destroy(gameObject);
     }
 }

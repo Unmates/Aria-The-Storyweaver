@@ -11,18 +11,18 @@ public class Switch : MonoBehaviour
     void Start()
     {
         // Initialize with the first character
-        if (canSwitch)
-        {
-            SwitchToCharacter(0);
-        }
+        SwitchToCharacter(0);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (canSwitch)
         {
-            // Switch to the next character
-            SwitchToCharacter((currentCharacterIndex + 1) % characters.Length);
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                // Switch to the next character
+                SwitchToCharacter((currentCharacterIndex + 1) % characters.Length);
+            }
         }
     }
 
@@ -48,5 +48,15 @@ public class Switch : MonoBehaviour
             // Update the camera to follow the new active character
             cameraFollow.target = characters[currentCharacterIndex];
         }
+    }
+
+    public void DisableSwitch()
+    {
+        canSwitch = false;
+    }
+
+    public void EnableSwitch()
+    {
+        canSwitch = true;
     }
 }

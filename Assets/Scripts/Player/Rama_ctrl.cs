@@ -340,7 +340,7 @@ public class Rama_ctrl : MonoBehaviour
         }
     }
 
-    public void dead()
+    public void Dead()
     {
         animator.SetBool("Dead", true);
         Debug.Log("Player dead");
