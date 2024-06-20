@@ -6,8 +6,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public delegate void EnemyDeathEventHandler();
-    public event EnemyDeathEventHandler OnEnemyDeath;
+    [Header("Event")]
+    [SerializeField] GameObject killTrigger;
+    KillZoneTrigger killZoneTrigger;
 
     [Header("Status")]
     [SerializeField] float maxhp = 100f;
@@ -40,6 +41,11 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        if (killTrigger != null)
+        {
+            killZoneTrigger = killTrigger.GetComponent<KillZoneTrigger>();
+        }
+
         currenthp = maxhp;
         animator = GetComponent<Animator>();
         health = playerhp.GetComponent<Health>();
@@ -96,7 +102,10 @@ public class Enemy : MonoBehaviour
         lineOfSight.enabled = false;
         rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         this.enabled = false;
-        StartCoroutine(InKillZone());
+        if (killTrigger != null)
+        {
+            killZoneTrigger.EnemyKilled();
+        }
     }
 
     bool playerClose()
@@ -143,15 +152,5 @@ public class Enemy : MonoBehaviour
     void DisableAttack()
     {
         isAttacking = false;
-    }
-
-    IEnumerator InKillZone()
-    {
-        yield return new WaitForSeconds(2);
-        if (OnEnemyDeath != null)
-        {
-            OnEnemyDeath.Invoke();
-        }
-        Destroy(gameObject);
     }
 }

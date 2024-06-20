@@ -169,6 +169,7 @@ public class Aria_ctrl : MonoBehaviour
         {
             if (Time.time >= lastAttackTime + attackCooldown)
             {
+                StopMovement();
                 SoundsManager.instance.PlaySound(fireballsSound);
                 animator.SetTrigger("Attack");
 

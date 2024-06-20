@@ -183,8 +183,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: BGM
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 94faf128cb6fa954784fccbe879d8ae2, type: 2}
+  m_sharedMaterial: {fileID: -6000884179726195448, guid: 94faf128cb6fa954784fccbe879d8ae2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1692,8 +1692,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Back
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 94faf128cb6fa954784fccbe879d8ae2, type: 2}
+  m_sharedMaterial: {fileID: -6000884179726195448, guid: 94faf128cb6fa954784fccbe879d8ae2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1967,7 +1967,7 @@ MonoBehaviour:
   start_btn: {fileID: 2024433132}
   setting_btn: {fileID: 100763934}
   exit_btn: {fileID: 1646541039}
-  buttonSound: {fileID: 8300000, guid: 85aadd26f48411c40b2a01217c8095ed, type: 3}
+  buttonSound: {fileID: 8300000, guid: 3e1695d89fb639e4a9b4d623e861a064, type: 3}
 --- !u!114 &1124600881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1984,7 +1984,7 @@ MonoBehaviour:
   bgmSlider: {fileID: 1588809816}
   sfxSlider: {fileID: 1884807089}
   backBtn: {fileID: 19146819}
-  buttonSound: {fileID: 8300000, guid: 85aadd26f48411c40b2a01217c8095ed, type: 3}
+  buttonSound: {fileID: 8300000, guid: 3e1695d89fb639e4a9b4d623e861a064, type: 3}
   bgmObject: {fileID: 503570015}
   sfxObject: {fileID: 363286200}
 --- !u!1 &1275377784
@@ -2047,8 +2047,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: SFX
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 94faf128cb6fa954784fccbe879d8ae2, type: 2}
+  m_sharedMaterial: {fileID: -6000884179726195448, guid: 94faf128cb6fa954784fccbe879d8ae2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -5,19 +5,28 @@ using UnityEngine.Playables;
 
 public class KillZoneTrigger : MonoBehaviour
 {
+    [SerializeField] float targetEnemyDead = 2f;
+    public float enemyDead;
     [SerializeField] PlayableDirector playableDirector;
 
-    void OnEnable()
+    //public delegate void AllEnemiesKilledEventHandler();
+    //public event AllEnemiesKilledEventHandler OnAllEnemiesKilled;
+
+    //private void Start()
+    //{
+    //    OnAllEnemiesKilled += TriggerEvent;
+    //}
+
+    public void EnemyKilled()
     {
-        Killzone.OnAllEnemiesKilled += TriggerEvent;
+        enemyDead++;
+        if (enemyDead >= targetEnemyDead)
+        {
+            TriggerEvent();
+        }
     }
 
-    void OnDisable()
-    {
-        Killzone.OnAllEnemiesKilled -= TriggerEvent;
-    }
-
-    void TriggerEvent()
+    private void TriggerEvent()
     {
         Debug.Log("All enemies in the area are killed! Event triggered.");
         playableDirector.Play();

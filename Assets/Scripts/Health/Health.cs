@@ -79,8 +79,16 @@ public class Health : MonoBehaviour
     { 
         if (!isInvul)
         {
-            currentPlayerHp = Mathf.Clamp(currentPlayerHp - _damage, 0, maxHealth);
             int currenChar = switchClass.currentCharacterIndex;
+
+            if (currenChar == 0)
+            {
+                currentPlayerHp = Mathf.Clamp(currentPlayerHp - _damage, 0, maxHealth);
+            }
+            else
+            {
+                currentPlayerHp = Mathf.Clamp(currentPlayerHp - (_damage * 0.5f), 0, maxHealth);
+            }
 
             if (currentPlayerHp > 0)
             {
